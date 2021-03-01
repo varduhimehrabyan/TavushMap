@@ -10,9 +10,22 @@ router.use(express.json());
 router.get('/api/supports',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.supports.usp_supportsList)
-            res.status(200).send({
-                data: data.rows
-            })
+
+            // console.log(data.rows);
+            let allData = [];
+            for(i = 0; i < data.rows.length; i++) {
+                allData.push({
+                    id: data.rows[i].categoryid,
+                    name: data.rows[i].category_arm,
+                    items: [{
+                        supportid: data.rows[i].supportid,
+                        supportname: data.rows[i].support_arm
+                    }]
+                })
+            }
+            console.log(allData);
+            res.send(allData)
+            // console.log(data.rows);
     }
     catch(err) {
         writeInLogs(err);
@@ -37,7 +50,7 @@ router.post('/api/supportListOnly',  async (req, res) => {
         const data = await pool.query(pgFunctions.supports.usp_supportsListOnly, [id])
             res.status(200).send({
                 data: data.rows
-            })
+            });
     }
     catch(err) {
         writeInLogs(err);
