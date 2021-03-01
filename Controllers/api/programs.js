@@ -40,6 +40,25 @@ router.post('/api/addProgram',  async (req, res) => {
     }
 });
 
+router.delete("/api/deleteProgram/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      let success;
+      const data = await pool.query(pgFunctions.programs.usp_deleteProgram, [id]);
+      if(data.rows[0].success == 0) {
+        success = false
+      } else {
+        success = true
+      }
+      res.send({
+        success: success,
+        errorMessage: data.rows[0].errorMessage,
+      });
+    } catch (err) {
+      writeInLogs(err);
+    }
+  });
+
 router.post('/api/editProgram',  async (req, res) => {
     try {
         const { programId, personId, supportId, categoryId,
