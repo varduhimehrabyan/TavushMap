@@ -22,17 +22,25 @@ router.get('/api/supports',  async (req, res) => {
 router.get('/api/supportsList',  async (req, res) => {
   try {
       const data = await pool.query(pgFunctions.supports.usp_supportsList)
+      console.log(data.rows);
           let allData = [];
-          let supportItems = []
+          let supportItems = [];
           for(i = 0; i < data.rows.length; i++) {
             for(j = 0; j < data.rows.length; j++) {
               if(data.rows[i] == data.rows[j]) {
                 supportItems.push({id: data.rows[i].supportid, supportName: data.rows[i].support_arm})
-                allData.push({
-                  id: data.rows[i].categoryid,
-                  categoryName: data.rows[i].category_arm,
-                  items: supportItems
-              })
+                    allData.push({
+                      id: data.rows[i].categoryid,
+                      categoryName: data.rows[i].category_arm,
+                      items: supportItems
+                  })
+              }
+            }
+          }
+          for(k = 0; k < allData.length; k++) {
+            for(e = 0; e < k; e++) {
+              if(allData[k].id == allData[e].id) {
+                allData.splice(e, 1);
               }
             }
           }
