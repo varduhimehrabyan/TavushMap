@@ -17,6 +17,7 @@ module.exports = {
     usp_supportsListOnly: 'SELECT * FROM "usp_supportsListOnly"($1)',
     usp_editSupport: 'SELECT * FROM "usp_editSupport"($1, $2, $3, $4, $5)',
     usp_deleteSupport: 'SELECT * FROM "usp_deleteSupport"($1)',
+    usp_addSupport: 'SELECT * FROM "usp_addSupport"($1, $2, $3)'
   },
   programs: {
     usp_addProgram: 'SELECT * FROM "usp_addProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)',

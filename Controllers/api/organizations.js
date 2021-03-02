@@ -10,6 +10,7 @@ router.use(express.json());
 router.get('/api/organizations',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.org.usp_organizationsList)
+        // console.log(data);
             res.status(200).send({
                 data: data.rows
             })

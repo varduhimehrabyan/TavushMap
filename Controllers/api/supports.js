@@ -13,25 +13,34 @@ router.get('/api/supports',  async (req, res) => {
             res.status(200).send({
               data: data.rows
             })
-            // console.log(data.rows);
-            // let allData = [];
-            // for(i = 0; i < data.rows.length; i++) {
-            //     allData.push({
-            //         id: data.rows[i].categoryid,
-            //         name: data.rows[i].category_arm,
-            //         items: [{
-            //             supportid: data.rows[i].supportid,
-            //             supportname: data.rows[i].support_arm
-            //         }]
-            //     })
-            // }
-            // console.log(allData);
-            // res.send(allData)
-            // console.log(data.rows);
     }
     catch(err) {
         writeInLogs(err);
     }
+});
+
+router.get('/api/supportsList',  async (req, res) => {
+  try {
+      const data = await pool.query(pgFunctions.supports.usp_supportsList)
+          let allData = [];
+          let supportItems = []
+          for(i = 0; i < data.rows.length; i++) {
+            for(j = 0; j < data.rows.length; j++) {
+              if(data.rows[i] == data.rows[j]) {
+                supportItems.push({id: data.rows[i].supportid, name: data.rows[i].support_arm})
+                allData.push({
+                  id: data.rows[i].categoryid,
+                  name: data.rows[i].category_arm,
+                  items: supportItems
+              })
+              }
+            }
+          }
+          res.send(allData)
+  }
+  catch(err) {
+      writeInLogs(err);
+  }
 });
 
 router.get('/api/supportTypes',  async (req, res) => {
@@ -57,6 +66,28 @@ router.post('/api/supportListOnly',  async (req, res) => {
     catch(err) {
         writeInLogs(err);
     }
+});
+
+router.post("/api/addSupport", async (req, res) => {
+  try {
+    const { support_eng, support_arm, categoryid } = req.body;
+    let success;
+    const data = await pool.query(pgFunctions.supports.usp_addSupport, [support_eng, support_arm, categoryid]);
+    if(data.rows[0].success == 0) {
+      success = false
+    } else {
+      success = true
+    }
+    res.status(200).send({
+      
+      id: data.rows[0].supportId,
+      success: success,
+      errorMessage: data.rows[0].errorMessage,
+    });
+    
+  } catch (err) {
+    writeInLogs(err);
+  }
 });
 
 router.delete("/api/deleteSupport/:id", async (req, res) => {
