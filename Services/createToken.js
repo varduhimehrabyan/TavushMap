@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secret = '39442051e92c051c27790d9552812efc88239532';
+const secret = 'abcdefghijqsajkc124589sacsascsa0584815';
 
 
 const createToken = function(res,email,id) {

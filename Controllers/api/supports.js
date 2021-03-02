@@ -27,10 +27,10 @@ router.get('/api/supportsList',  async (req, res) => {
           for(i = 0; i < data.rows.length; i++) {
             for(j = 0; j < data.rows.length; j++) {
               if(data.rows[i] == data.rows[j]) {
-                supportItems.push({id: data.rows[i].supportid, name: data.rows[i].support_arm})
+                supportItems.push({id: data.rows[i].supportid, supportName: data.rows[i].support_arm})
                 allData.push({
                   id: data.rows[i].categoryid,
-                  name: data.rows[i].category_arm,
+                  categoryName: data.rows[i].category_arm,
                   items: supportItems
               })
               }
