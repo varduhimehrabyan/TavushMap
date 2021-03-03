@@ -30,20 +30,8 @@ router.get('/api/communitiesList',  async (req, res) => {
         writeInLogs(err);
     }
 });
-
-router.get('/api/mapPointList',  async (req, res) => {
-    try {
-        const data = await pool.query(pgFunctions.communities.usp_mapPointList)
-            res.status(200).send({
-              data: data.rows
-            })
-    }
-    catch(err) {
-        writeInLogs(err);
-    }
-  });
   
-  router.get('/api/programListForFilterEng',  async (req, res) => {
+router.get('/api/programListForFilterEng',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.communities.usp_programListForFilter_eng)
             res.status(200).send({
@@ -53,9 +41,9 @@ router.get('/api/mapPointList',  async (req, res) => {
     catch(err) {
         writeInLogs(err);
     }
-  });
+});
   
-  router.get('/api/programListForFilterArm',  async (req, res) => {
+router.get('/api/programListForFilterArm',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.communities.usp_programListForFilter_arm)
             res.status(200).send({
@@ -65,9 +53,9 @@ router.get('/api/mapPointList',  async (req, res) => {
     catch(err) {
         writeInLogs(err);
     }
-  });
+});
   
-  router.post("/api/filters", async (req, res) => {
+router.post("/api/filterArm", async (req, res) => {
     try {
       const { community_arm, status_arm, support_arm } = req.body;
       const data = await pool.query(pgFunctions.communities.usp_filter_arm, [community_arm, status_arm, support_arm]);
@@ -78,7 +66,20 @@ router.get('/api/mapPointList',  async (req, res) => {
     } catch (err) {
       writeInLogs(err);
     }
-  });
+});
+
+router.post("/api/filterEng", async (req, res) => {
+    try {
+      const { community_eng, status_eng, support_eng } = req.body;
+      const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
+      res.status(200).send({
+        data: data.rows
+      });
+      
+    } catch (err) {
+      writeInLogs(err);
+    }
+});
 
 
 module.exports = router;

@@ -11,10 +11,10 @@ module.exports = {
   communities: {
     usp_communitiesList: 'SELECT * FROM "usp_communitiesList"()',
     usp_communitiesList_eng: 'SELECT * FROM "usp_communitiesList_eng"()',
-    usp_mapPointList: 'SELECT * FROM "usp_mapPointList"()',
     usp_programListForFilter_eng: 'SELECT * FROM "usp_programListForFilter_eng"()',
     usp_programListForFilter_arm: 'SELECT * FROM "usp_programListForFilter_arm"()',
     usp_filter_arm: 'SELECT * FROM "usp_filter_arm"($1, $2, $3)',  
+    usp_filter_eng: 'SELECT * FROM "usp_filter_eng"($1, $2, $3)', 
   },
   supports: {
     usp_supportsList: 'SELECT * FROM "usp_supportsList"()',    
