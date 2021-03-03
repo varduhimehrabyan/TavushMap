@@ -22,7 +22,7 @@ router.get('/api/supports',  async (req, res) => {
 router.get('/api/supportsList',  async (req, res) => {
   try {
       const data = await pool.query(pgFunctions.supports.usp_supportsList)
-      console.log(data.rows);
+      // console.log(data.rows);
           let allData = [];
           let supportItems = [];
           for(i = 0; i < data.rows.length; i++) {

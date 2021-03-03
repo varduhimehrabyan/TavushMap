@@ -21,6 +21,7 @@ module.exports = {
   },
   programs: {
     usp_addProgram: 'SELECT * FROM "usp_addProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)',
+    usp_programList: 'SELECT * FROM "usp_programList"()',
     usp_editProgram: 'SELECT * FROM "usp_editProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23, $24)',
     usp_deleteProgram: 'SELECT * FROM "usp_deleteProgram"($1)',
   },
@@ -29,5 +30,18 @@ module.exports = {
     usp_addCategory: 'SELECT * FROM "usp_addCategory"($1, $2)',
     usp_deleteCategory: 'SELECT * FROM "usp_deleteCategory"($1)',
     usp_editCategory: 'SELECT * FROM "usp_editCategory"($1, $2, $3)',
+  },
+  settings: {
+    usp_userInfoList: 'SELECT * FROM "usp_userInfoList"()',
+    usp_addUser: 'SELECT * FROM "usp_addUser"($1, $2, $3, $4)',
+    usp_changePassword: 'SELECT * FROM "usp_changePassword"($1, $2)',
+    usp_deleteUser: 'SELECT * FROM "usp_deleteUser"($1)',
+    usp_editUserInfo: 'SELECT * FROM "usp_editUserInfo"($1, $2, $3)',
+  },
+  filters: {
+    usp_mapPointList: 'SELECT * FROM "usp_mapPointList"()',
+    usp_programListForFilter_eng: 'SELECT * FROM "usp_programListForFilter_eng"()',
+    usp_programListForFilter_arm: 'SELECT * FROM "usp_programListForFilter_arm"()',
+    usp_filter_arm: 'SELECT * FROM "usp_filter_arm"($1, $2, $3)',    
   }
 }

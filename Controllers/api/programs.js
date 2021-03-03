@@ -7,25 +7,37 @@ const writeInLogs = require('../../Services/writeInLogs')
 
 router.use(express.json());
 
+router.get('/api/programs',  async (req, res) => {
+  try {
+      const data = await pool.query(pgFunctions.programs.usp_programList)
+          res.status(200).send({
+            data: data.rows
+          })
+  }
+  catch(err) {
+      writeInLogs(err);
+  }
+});
+
 router.post('/api/addProgram',  async (req, res) => {
     try {
         const { name_arm, name_eng,
-                community, budge,
-                startDate, endDate,
+                communityid, budget,
+                start_date, end_date,
                 manager_arm, manager_eng,
                 contactPerson_arm, contactPerson_eng,
-                organization, category, support_type,
-                description_arm, description_eng, status } = req.body
+                organizationid, categoryid , supportid,
+                description_arm, description_eng, statusid, isdonor } = req.body
                 console.log(req.body);
         const data = await pool.query(pgFunctions.programs.usp_addProgram,
             [
-                name_arm, name_eng,
-                community, budge,
-                startDate, endDate,
-                manager_arm, manager_eng,
-                contactPerson_arm, contactPerson_eng,
-                organization, category, support_type,
-                description_arm, description_eng, status
+              name_arm, name_eng,
+              communityid, budget,
+              start_date, end_date,
+              manager_arm, manager_eng,
+              contactPerson_arm, contactPerson_eng,
+              organizationid, categoryid , supportid,
+              description_arm, description_eng, statusid, isdonor
             ])
             res.status(200).send({
                 programid: data.rows[0].programid,
@@ -75,7 +87,7 @@ router.post('/api/editProgram',  async (req, res) => {
                 communityid, budget, start_date, end_date,
                 manager_arm, manager_eng, contactPerson_arm, contactPerson_eng,
                 isDonor, organizationid, categoryid, supportid,
-                description_arm, description_eng , status_arm, status_eng
+                description_arm, description_eng , status
             ])
             res.status(200).send({
                 programid: data.rows[0].programid,
