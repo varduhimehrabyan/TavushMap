@@ -7,7 +7,6 @@ router.use('/', require('./supports.js'));
 router.use('/', require('./programs.js'));
 router.use('/', require('./categories.js'));
 router.use('/', require('./settings.js'));
-router.use('/', require('./filters.js'));
 
 
 module.exports = router
