@@ -65,20 +65,8 @@ router.delete("/api/deleteUser/:id", async (req, res) => {
 // router.put("/api/changePassword", async (req, res) => {
 //     try {
 //       const { id, password } = req.body;
-//       const users = await pool(pgFunctions.settings.usp_userInfoList);
+//       const correctPassword = await bcrypt.compare(password,result.rows[0].password);
 //       console.log(users);
-//       if(users.rowCount == 0) {
-//         res.send({
-//             success: false,
-//             errorMessage: "Նման օգտատեր գոյություն չունի"
-//         })
-//       } else {
-//           for(i = 0; i < users.length; i++) {
-//               if(id == users[i].id) {
-
-//               }
-//           }
-//       }
 //     } catch (err) {
 //       writeInLogs(err);
 //     }

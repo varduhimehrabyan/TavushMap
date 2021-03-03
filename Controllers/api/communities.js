@@ -19,9 +19,21 @@ router.get('/api/communities',  async (req, res) => {
     }
 });
 
+router.get('/api/communitiesList',  async (req, res) => {
+    try {
+        const data = await pool.query(pgFunctions.communities.usp_communitiesList_eng)
+            res.status(200).send({
+                data: data.rows
+            })
+    }
+    catch(err) {
+        writeInLogs(err);
+    }
+});
+
 router.get('/api/mapPointList',  async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.filters.usp_mapPointList)
+        const data = await pool.query(pgFunctions.communities.usp_mapPointList)
             res.status(200).send({
               data: data.rows
             })
@@ -33,7 +45,7 @@ router.get('/api/mapPointList',  async (req, res) => {
   
   router.get('/api/programListForFilterEng',  async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.filters.usp_programListForFilter_eng)
+        const data = await pool.query(pgFunctions.communities.usp_programListForFilter_eng)
             res.status(200).send({
               data: data.rows
             })
@@ -45,7 +57,7 @@ router.get('/api/mapPointList',  async (req, res) => {
   
   router.get('/api/programListForFilterArm',  async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.filters.usp_programListForFilter_arm)
+        const data = await pool.query(pgFunctions.communities.usp_programListForFilter_arm)
             res.status(200).send({
               data: data.rows
             })
@@ -58,7 +70,7 @@ router.get('/api/mapPointList',  async (req, res) => {
   router.post("/api/filters", async (req, res) => {
     try {
       const { community_arm, status_arm, support_arm } = req.body;
-      const data = await pool.query(pgFunctions.filters.usp_filter_arm, [community_arm, status_arm, support_arm]);
+      const data = await pool.query(pgFunctions.communities.usp_filter_arm, [community_arm, status_arm, support_arm]);
       res.status(200).send({
         data: data.rows
       });
