@@ -21,30 +21,26 @@ router.get('/api/supports',  async (req, res) => {
 
 router.get('/api/supportsList',  async (req, res) => {
   try {
-      const data = await pool.query(pgFunctions.supports.usp_supportsList)
-      // console.log(data.rows);
-          let allData = [];
-          let supportItems = [];
-          for(i = 0; i < data.rows.length; i++) {
-            for(j = 0; j < data.rows.length; j++) {
-              if(data.rows[i] == data.rows[j]) {
-                supportItems.push({id: data.rows[i].supportid, supportName: data.rows[i].support_arm})
-                    allData.push({
-                      id: data.rows[i].categoryid,
-                      categoryName: data.rows[i].category_arm,
-                      items: supportItems
-                  })
-              }
-            }
-          }
-          for(k = 0; k < allData.length; k++) {
-            for(e = 0; e < k; e++) {
-              if(allData[k].id == allData[e].id) {
-                allData.splice(e, 1);
-              }
-            }
-          }
-          res.send(allData)
+      const data = await pool.query(pgFunctions.supports.usp_supportsList);
+      let allData = []
+      for(i = 0; i < data.rows.length; i++) {
+        const supports = await pool.query(pgFunctions.supports.usp_supportsListOnly, [data.rows[i].categoryid]);
+        allData.push({
+          categoryid: data.rows[i].categoryid,
+          category_arm: data.rows[i].category_arm,
+          items: supports.rows
+        })
+    }
+
+      for(j = 0; j < allData.length; j++) {
+        for(k = 0; k < allData.length; k++) {
+          if(allData[k].categoryid == allData[j].categoryid) {
+              allData.splice(j, 1)
+          } 
+        }
+      }
+
+      res.send(allData);
   }
   catch(err) {
       writeInLogs(err);
