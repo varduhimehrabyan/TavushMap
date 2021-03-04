@@ -26,6 +26,7 @@ router.get('/api/supportsList',  async (req, res) => {
       for(i = 0; i < data.rows.length; i++) {
         const supports = await pool.query(pgFunctions.supports.usp_supportsListOnly, [data.rows[i].categoryid]);
         allData.push({
+          id: data.rows[i].id,
           categoryid: data.rows[i].categoryid,
           category_arm: data.rows[i].category_arm,
           items: supports.rows
