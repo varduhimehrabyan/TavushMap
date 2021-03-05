@@ -31,9 +31,10 @@ router.get('/api/communitiesList',  async (req, res) => {
     }
 });
   
-router.get('/api/programListForFilterEng',  async (req, res) => {
+router.post('/api/programListForFilterEng',  async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.communities.usp_programListForFilter_eng)
+        const { mappointid } = req.body;
+        const data = await pool.query(pgFunctions.communities.usp_programListForFilter_eng, [ mappointid ])
             res.status(200).send({
               data: data.rows
             })
@@ -43,9 +44,10 @@ router.get('/api/programListForFilterEng',  async (req, res) => {
     }
 });
   
-router.get('/api/programListForFilterArm',  async (req, res) => {
+router.post('/api/programListForFilterArm',  async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.communities.usp_programListForFilter_arm)
+        const { mappointid } = req.body;
+        const data = await pool.query(pgFunctions.communities.usp_programListForFilter_arm, [ mappointid ])
             res.status(200).send({
               data: data.rows
             })

@@ -11,8 +11,8 @@ module.exports = {
   communities: {
     usp_communitiesList: 'SELECT * FROM "usp_communitiesList"()',
     usp_communitiesList_eng: 'SELECT * FROM "usp_communitiesList_eng"()',
-    usp_programListForFilter_eng: 'SELECT * FROM "usp_programListForFilter_eng"()',
-    usp_programListForFilter_arm: 'SELECT * FROM "usp_programListForFilter_arm"()',
+    usp_programListForFilter_eng: 'SELECT * FROM "usp_programListForFilter_eng"($1)',
+    usp_programListForFilter_arm: 'SELECT * FROM "usp_programListForFilter_arm"($1)',
     usp_filter_arm: 'SELECT * FROM "usp_filter_arm"($1, $2, $3)',  
     usp_filter_eng: 'SELECT * FROM "usp_filter_eng"($1, $2, $3)', 
   },
@@ -42,5 +42,7 @@ module.exports = {
     usp_changePassword: 'SELECT * FROM "usp_changePassword"($1, $2)',
     usp_deleteUser: 'SELECT * FROM "usp_deleteUser"($1)',
     usp_editUserInfo: 'SELECT * FROM "usp_editUserInfo"($1, $2, $3)',
+    usp_activateUser: 'SELECT * FROM "usp_activateUser"($1)',
+    usp_addPassword: 'SELECT * FROM "usp_addPassword"($1, $2)',
   },
 }

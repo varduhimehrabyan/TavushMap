@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const writeInLogs = require('../../Services/writeInLogs');
 const jwt = require('jsonwebtoken');
 const jwt_decode = require('jwt-decode');
-const secret = 'abcdefghijqsajkc124589sacsascsa0584815';
+const secret = process.env.secret;
 
 router.use(express.json());
 router.use(cookieParser());
