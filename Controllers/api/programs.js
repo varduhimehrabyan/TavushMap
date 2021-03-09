@@ -9,7 +9,8 @@ router.use(express.json());
 
 router.get('/api/programs',  async (req, res) => {
   try {
-      const data = await pool.query(pgFunctions.programs.usp_programList)
+    // const id = null
+      const data = await pool.query(pgFunctions.programs.usp_programList, [null])
           res.status(200).send({
             data: data.rows
           })
@@ -39,7 +40,7 @@ router.post('/api/addProgram',  async (req, res) => {
               organizationid, categoryid_supportid,
               description_arm, description_eng, statusid, isdonor
             ])
-            res.status(200).send({
+            res.send({
                 programid: data.rows[0].programid,
                 personid: data.rows[0].personid,
                 categorySupportid: data.rows[0].categorySupportid,

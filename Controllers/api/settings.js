@@ -27,14 +27,14 @@ router.post("/api/addUser", async (req, res) => {
       // const hashPassword = await bcrypt.hash(password, 10);
       let success;
       const data = await pool.query(pgFunctions.settings.usp_addUser, [firstName, lastName, email]);
-      console.log(data);
+      // console.log(data);
       if(data.rows[0].success == 0) {
         success = false
       } else {
         success = true
       }
       const id = data.rows[0].id;
-      sendMail('vard.mehrabyan77@gmail.com', email, id, )
+      sendMail('vard.mehrabyan77@gmail.com', email, id)
       // res.status(200).send({
         
       //   id: data.rows[0].id,

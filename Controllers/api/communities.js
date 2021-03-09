@@ -19,6 +19,38 @@ router.get('/api/communities',  async (req, res) => {
     }
 });
 
+router.post("/api/forSyuzik", async (req, res) => {
+  try {
+    const { community_eng, status_eng, support_eng } = req.body;
+    let allData = [];
+    let supports = [];
+    const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
+
+    for(i = 0; i < data.rows.length; i++) {
+      allData.push({
+        id: data.rows[i].categoryId,
+        categoryName: data.rows[i].categoryName,
+        // supports: supports.rows
+      })
+  }
+
+    for(j = 0; j < allData.length; j++) {
+      for(k = 0; k < allData.length; k++) {
+        if(allData[k].id == allData[j].id) {
+            allData.splice(j, 1)
+        } 
+      }
+    }
+
+    res.status(200).send({
+      data: allData
+    });
+    
+  } catch (err) {
+    writeInLogs(err);
+  }
+});
+
 router.get('/api/communitiesList',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.communities.usp_communitiesList_eng)
@@ -32,9 +64,11 @@ router.get('/api/communitiesList',  async (req, res) => {
 });
   
 router.post('/api/programListForFilterEng',  async (req, res) => {
+  
     try {
-        const { mappointid } = req.body;
-        const data = await pool.query(pgFunctions.communities.usp_programListForFilter_eng, [ mappointid ])
+        const { selectedInfoId } = req.body;
+        const data = await pool.query(pgFunctions.programs.usp_programList, [selectedInfoId]);
+        
             res.status(200).send({
               data: data.rows
             })
@@ -73,7 +107,12 @@ router.post("/api/filterArm", async (req, res) => {
 router.post("/api/filterEng", async (req, res) => {
     try {
       const { community_eng, status_eng, support_eng } = req.body;
+      // let datas = [];
       const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
+      // for(i = 0; i < data.rows.length; i++) {
+      //   datas.push({categoryName: data.rows[i].categoryName, support: data.rows[i].support})
+      // }
+
       res.status(200).send({
         data: data.rows
       });

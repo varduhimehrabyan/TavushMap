@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const writeInLogs = require('./writeInLogs');
 
 
-module.exports = (user, email, id, subject, bodyText) => {
+module.exports = (user, email, id) => {
 
     let gmailSecret = process.env.gmailSecret
 
@@ -32,8 +32,8 @@ module.exports = (user, email, id, subject, bodyText) => {
         mailOptions = {
             from: user,
             to: email,
-            subject,
-            html: `<p style="font-size:19px">${bodyText}</p>`
+            subject: "Դուք չեք կարող հաստատել Ձեր էլ․հասցեն",
+            html: `<p style="font-size:19px">Տվյալ օգտատերի id-ն գոյություն չունի</p>`
         }
     }
 
