@@ -4,6 +4,7 @@ const pool = require('../../Config/database');
 const pgFunctions = require('../../pgFunctions');
 const writeInLogs = require('../../Services/writeInLogs');
 const bcrypt = require('bcrypt');
+const sendMail = require('../../Services/sendMail');
 // const tokenVerify = require('../../MiddleWare/tokenVerify');
 
 router.use(express.json());
@@ -20,28 +21,31 @@ router.get('/api/settings',  async (req, res) => {
   }
 });
 
-// router.post("/api/addUser", async (req, res) => {
-//     try {
-//       const { firstName, lastName, email } = req.body;
-//       const hashPassword = await bcrypt.hash(password, 10);
-//       let success;
-//       const data = await pool.query(pgFunctions.settings.usp_addUser, [firstName, lastName, email, hashPassword]);
-//       if(data.rows[0].success == 0) {
-//         success = false
-//       } else {
-//         success = true
-//       }
-//       res.status(200).send({
+router.post("/api/addUser", async (req, res) => {
+    try {
+      const { firstName, lastName, email } = req.body;
+      // const hashPassword = await bcrypt.hash(password, 10);
+      let success;
+      const data = await pool.query(pgFunctions.settings.usp_addUser, [firstName, lastName, email]);
+      console.log(data);
+      if(data.rows[0].success == 0) {
+        success = false
+      } else {
+        success = true
+      }
+      const id = data.rows[0].id;
+      sendMail('vard.mehrabyan77@gmail.com', email, id, )
+      // res.status(200).send({
         
-//         id: data.rows[0].id,
-//         success: success,
-//         errorMessage: data.rows[0].errorMessage,
-//       });
+      //   id: data.rows[0].id,
+      //   success: success,
+      //   errorMessage: data.rows[0].errorMessage,
+      // });
       
-//     } catch (err) {
-//       writeInLogs(err);
-//     }
-//   });
+    } catch (err) {
+      writeInLogs(err);
+    }
+  });
 
 router.delete("/api/deleteUser/:id", async (req, res) => {
     try {

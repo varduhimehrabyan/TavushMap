@@ -25,7 +25,7 @@ module.exports = {
     usp_addSupport: 'SELECT * FROM "usp_addSupport"($1, $2, $3)'
   },
   programs: {
-    usp_addProgram: 'SELECT * FROM "usp_addProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)',
+    usp_addProgram: 'SELECT * FROM "usp_addProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)',
     usp_programList: 'SELECT * FROM "usp_programList"()',
     usp_editProgram: 'SELECT * FROM "usp_editProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23, $24)',
     usp_deleteProgram: 'SELECT * FROM "usp_deleteProgram"($1)',
@@ -38,11 +38,12 @@ module.exports = {
   },
   settings: {
     usp_userInfoList: 'SELECT * FROM "usp_userInfoList"()',
-    usp_addUser: 'SELECT * FROM "usp_addUser"($1, $2, $3, $4)',
+    usp_addUser: 'SELECT * FROM "usp_addUser"($1, $2, $3)',
     usp_changePassword: 'SELECT * FROM "usp_changePassword"($1, $2)',
     usp_deleteUser: 'SELECT * FROM "usp_deleteUser"($1)',
     usp_editUserInfo: 'SELECT * FROM "usp_editUserInfo"($1, $2, $3)',
     usp_activateUser: 'SELECT * FROM "usp_activateUser"($1)',
     usp_addPassword: 'SELECT * FROM "usp_addPassword"($1, $2)',
+    usp_makeActive: 'SELECT * FROM "usp_userInfoList"($1)',
   },
 }

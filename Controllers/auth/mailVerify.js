@@ -19,7 +19,7 @@ router.get('/api/auth/verify',  async (req, res) => {
         if (err) {
             res.clearCookie('token');
             res.clearCookie('refresh');
-            res.redirect(`${host}/addUser`);  //fronti url-y Linayi hamar
+            res.redirect(`${host}/api/addUser`);  //fronti url-y Linayi hamar
         }
 
         if(data) {

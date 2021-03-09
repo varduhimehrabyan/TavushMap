@@ -6,6 +6,7 @@ const writeInLogs = require('./writeInLogs');
 module.exports = (user, email, id, subject, bodyText) => {
 
     let gmailSecret = process.env.gmailSecret
+
     var transport = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -15,6 +16,7 @@ module.exports = (user, email, id, subject, bodyText) => {
 
     if (id) {
 
+        console.log("id is exist");
         let tokenGmail = jwt.sign({ id }, gmailSecret, { expiresIn: '1h' })
         let link = `${process.env.host}/api/auth/verify?id=${id}&code=${tokenGmail}`
 
@@ -26,7 +28,7 @@ module.exports = (user, email, id, subject, bodyText) => {
         }
 
     } else {
-
+        console.log("id is not exist");
         mailOptions = {
             from: user,
             to: email,
