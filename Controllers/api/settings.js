@@ -33,15 +33,53 @@ router.post("/api/addUser", async (req, res) => {
       } else {
         success = true
       }
-      const id = data.rows[0].id;
-      sendMail('vard.mehrabyan77@gmail.com', email, id)
-      // res.status(200).send({
-        
-      //   id: data.rows[0].id,
-      //   success: success,
-      //   errorMessage: data.rows[0].errorMessage,
-      // });
+      console.log(data.rows[0].id);
+      sendMail('vard.mehrabyan77@gmail.com', email, data.rows[0].id)
+      // res.send
       
+    } catch (err) {
+      writeInLogs(err);
+    }
+  });
+
+router.post("/api/setPassword", async (req, res) => {
+    try {
+      const { id, password } = req.body;
+      const hashPassword = await bcrypt.hash(password, 10);
+      let success;
+      const addPassword = await pool.query(pgFunctions.settings.usp_addPassword, [ id, hashPassword ]);
+      if(addPassword.rows[0].success == 0) {
+        success = false
+      } else {
+        success = true
+      }
+
+      res.send({
+        success: success,
+        errorMessage: addPassword.rows[0].errorMessage,
+      })
+      
+    } catch (err) {
+      writeInLogs(err);
+    }
+});
+
+router.put("/api/changePassword", async (req, res) => {
+    try {
+      const { id, password } = req.body;
+      const hashPassword = await bcrypt.hash(password, 10);
+      let success;
+      const changePassword = await pool.query(pgFunctions.settings.usp_changePassword, [ id, hashPassword ]);
+      if(changePassword.rows[0].success == 0) {
+        success = false
+      } else {
+        success = true
+      }
+
+      res.send({
+        success: success,
+        errorMessage: changePassword.rows[0].errorMessage,
+      })
     } catch (err) {
       writeInLogs(err);
     }

@@ -66,17 +66,31 @@ router.get('/api/communitiesList',  async (req, res) => {
 router.post('/api/programListForFilterEng',  async (req, res) => {
   
     try {
-        const { selectedInfoId } = req.body;
-        const data = await pool.query(pgFunctions.programs.usp_programList, [selectedInfoId]);
-        
-            res.status(200).send({
-              data: data.rows
-            })
+        const { mappointid } = req.body;
+        console.log("mappointid: ", mappointid);
+        const data = await pool.query(pgFunctions.programs.usp_programList, [mappointid]);
+          res.status(200).send({
+            data: data.rows
+          })          
     }
     catch(err) {
         writeInLogs(err);
     }
 });
+
+// router.post("/api/forLina", async (req, res) => {
+//   try {
+//       const { community_eng, status_eng, support_eng } = req.body;
+//       const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
+//       const data2 = await pool.query(pgFunctions.programs.usp_programList, [data.rows[0].mappointid]);
+//     res.status(200).send({
+//       data: data2.rows
+//     });
+    
+//   } catch (err) {
+//     writeInLogs(err);
+//   }
+// });
   
 router.post('/api/programListForFilterArm',  async (req, res) => {
     try {
@@ -107,12 +121,7 @@ router.post("/api/filterArm", async (req, res) => {
 router.post("/api/filterEng", async (req, res) => {
     try {
       const { community_eng, status_eng, support_eng } = req.body;
-      // let datas = [];
       const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
-      // for(i = 0; i < data.rows.length; i++) {
-      //   datas.push({categoryName: data.rows[i].categoryName, support: data.rows[i].support})
-      // }
-
       res.status(200).send({
         data: data.rows
       });

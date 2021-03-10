@@ -42,18 +42,13 @@ router.get('/api/auth/verify',  async (req, res) => {
 
                     res.clearCookie('token')
 
-                    res.redirect(`${host}/login`)
+                    res.redirect(`${host}/password`)
 
                 } else if (setActive.rows[0].success == 0 && setActive.rows[0].exists == 0) {
 
                     res.clearCookie('token')
 
-                    res.redirect(`${host}/register`)
-                } else if (setActive.rows[0].success == 0 && setActive.rows[0].exists == 0) {
-
-                    res.clearCookie('token')
-
-                    res.redirect(`${host}/register`)
+                    res.redirect(`${host}/addUser`)
                 }
             } catch (err) {
                 if (!setActive) {
