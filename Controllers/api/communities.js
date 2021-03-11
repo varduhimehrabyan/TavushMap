@@ -19,35 +19,15 @@ router.get('/api/communities',  async (req, res) => {
     }
 });
 
-router.post("/api/forSyuzik", async (req, res) => {
+router.get('/api/statuses',  async (req, res) => {
   try {
-    const { community_eng, status_eng, support_eng } = req.body;
-    let allData = [];
-    let supports = [];
-    const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
-
-    for(i = 0; i < data.rows.length; i++) {
-      allData.push({
-        id: data.rows[i].categoryId,
-        categoryName: data.rows[i].categoryName,
-        // supports: supports.rows
-      })
+      const data = await pool.query(pgFunctions.communities.usp_statusList)
+          res.status(200).send({
+              data: data.rows
+          })
   }
-
-    for(j = 0; j < allData.length; j++) {
-      for(k = 0; k < allData.length; k++) {
-        if(allData[k].id == allData[j].id) {
-            allData.splice(j, 1)
-        } 
-      }
-    }
-
-    res.status(200).send({
-      data: allData
-    });
-    
-  } catch (err) {
-    writeInLogs(err);
+  catch(err) {
+      writeInLogs(err);
   }
 });
 
@@ -67,7 +47,7 @@ router.post('/api/programListForFilterEng',  async (req, res) => {
   
     try {
         const { mappointid } = req.body;
-        console.log("mappointid: ", mappointid);
+        // console.log("mappointid: ", mappointid);
         const data = await pool.query(pgFunctions.programs.usp_programList, [mappointid]);
           res.status(200).send({
             data: data.rows
@@ -77,20 +57,6 @@ router.post('/api/programListForFilterEng',  async (req, res) => {
         writeInLogs(err);
     }
 });
-
-// router.post("/api/forLina", async (req, res) => {
-//   try {
-//       const { community_eng, status_eng, support_eng } = req.body;
-//       const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
-//       const data2 = await pool.query(pgFunctions.programs.usp_programList, [data.rows[0].mappointid]);
-//     res.status(200).send({
-//       data: data2.rows
-//     });
-    
-//   } catch (err) {
-//     writeInLogs(err);
-//   }
-// });
   
 router.post('/api/programListForFilterArm',  async (req, res) => {
     try {
@@ -121,6 +87,9 @@ router.post("/api/filterArm", async (req, res) => {
 router.post("/api/filterEng", async (req, res) => {
     try {
       const { community_eng, status_eng, support_eng } = req.body;
+      console.log(req.body);
+      console.log(typeof(community_eng[0]));
+      // console.log({ community_eng, status_eng, support_eng });
       const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
       res.status(200).send({
         data: data.rows

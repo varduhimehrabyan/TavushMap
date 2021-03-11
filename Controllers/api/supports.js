@@ -35,7 +35,7 @@ router.get('/api/supportsList',  async (req, res) => {
 
       for(j = 0; j < allData.length; j++) {
         for(k = 0; k < allData.length; k++) {
-          if(allData[k].categoryid == allData[j].categoryid) {
+          if(allData[k].id == allData[j].id) {
               allData.splice(j, 1)
           } 
         }

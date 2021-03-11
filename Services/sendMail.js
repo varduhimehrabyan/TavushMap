@@ -3,25 +3,27 @@ const jwt = require('jsonwebtoken');
 const writeInLogs = require('./writeInLogs');
 
 
-module.exports = (user, email, id) => {
+module.exports = (email, id) => {
 
     let gmailSecret = process.env.gmailSecret
 
     var transport = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user,
-        }
+            user: "test.fish.farm@gmail.com",
+            pass: "fishFarmTest777",
+          },
     })
 
     if (id) {
 
         console.log("id is exist");
         let tokenGmail = jwt.sign({ id }, gmailSecret, { expiresIn: '1h' })
-        let link = `${process.env.host}/api/auth/verify?id=${id}&code=${tokenGmail}`
+        let link = `${process.env.host}/confirmPassword?id=${id}&code=${tokenGmail}`
+        console.log("link: ", link);
 
         mailOptions = {
-            from: user,
+            from: "test.fish.farm@gmail.com",
             to: email,
             subject: "Հաստատեք Ձեր էլ․հասցեն",
             html: `<p style="font-size:19px">Գաղտնաբառը ներմուծելու և կայք մուտք գործելու համար խնդրում ենք հաստատել Ձեր Էլ․հասցեն՝ սեղմելով <a href="${link}"> այստեղ :</a></p>`
@@ -30,7 +32,7 @@ module.exports = (user, email, id) => {
     } else {
         console.log("id is not exist");
         mailOptions = {
-            from: user,
+            from: "test.fish.farm@gmail.com",
             to: email,
             subject: "Դուք չեք կարող հաստատել Ձեր էլ․հասցեն",
             html: `<p style="font-size:19px">Տվյալ օգտատերի id-ն գոյություն չունի</p>`

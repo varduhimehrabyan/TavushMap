@@ -27,7 +27,7 @@ router.post('/api/addProgram',  async (req, res) => {
                 manager_arm, manager_eng,
                 contactPerson_arm, contactPerson_eng,
                 organizationid, categoryid_supportid,
-                description_arm, description_eng, statusid, isdonor, mappointid } = req.body
+                description_arm, description_eng, statusid, isdonor } = req.body
                 console.log(req.body);
         const data = await pool.query(pgFunctions.programs.usp_addProgram,
             [
@@ -37,7 +37,7 @@ router.post('/api/addProgram',  async (req, res) => {
               manager_arm, manager_eng,
               contactPerson_arm, contactPerson_eng,
               organizationid, categoryid_supportid,
-              description_arm, description_eng, statusid, isdonor, mappointid
+              description_arm, description_eng, statusid, isdonor
             ])
             res.send({
                 programid: data.rows[0].programid,

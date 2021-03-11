@@ -33,9 +33,14 @@ router.post("/api/addUser", async (req, res) => {
       } else {
         success = true
       }
-      console.log(data.rows[0].id);
-      sendMail('vard.mehrabyan77@gmail.com', email, data.rows[0].id)
-      // res.send
+      console.log({id: data.rows[0].id, email: email});
+      sendMail(email, data.rows[0].id)
+      res.send({
+        firstName, 
+        lastName, 
+        email,
+        id: data.rows[0].id
+      })
       
     } catch (err) {
       writeInLogs(err);

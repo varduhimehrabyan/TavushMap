@@ -15,6 +15,7 @@ module.exports = {
     usp_programListForFilter_arm: 'SELECT * FROM "usp_programListForFilter_arm"($1)',
     usp_filter_arm: 'SELECT * FROM "usp_filter_arm"($1, $2, $3)',  
     usp_filter_eng: 'SELECT * FROM "usp_filter_eng"($1, $2, $3)', 
+    usp_statusList: 'SELECT * FROM "usp_statusList"()',
   },
   supports: {
     usp_supportsList: 'SELECT * FROM "usp_supportsList"()',    
@@ -25,7 +26,7 @@ module.exports = {
     usp_addSupport: 'SELECT * FROM "usp_addSupport"($1, $2, $3)'
   },
   programs: {
-    usp_addProgram: 'SELECT * FROM "usp_addProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16, $17)',
+    usp_addProgram: 'SELECT * FROM "usp_addProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)',
     usp_programList: 'SELECT * FROM "usp_programList"($1)',
     usp_editProgram: 'SELECT * FROM "usp_editProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23, $24)',
     usp_deleteProgram: 'SELECT * FROM "usp_deleteProgram"($1)',
