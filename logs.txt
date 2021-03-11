@@ -1,6 +1,0 @@
-03/11/2021  16:05 
-  TypeError: Cannot read property '0' of undefined 
-
-03/11/2021  16:05 
-  error: invalid input syntax for integer: "" 
-
