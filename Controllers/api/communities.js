@@ -87,7 +87,7 @@ router.post("/api/filterArm", async (req, res) => {
 router.post("/api/filterEng", async (req, res) => {
     try {
       const { community_eng, status_eng, support_eng } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
       console.log(typeof(community_eng[0]));
       // console.log({ community_eng, status_eng, support_eng });
       const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);

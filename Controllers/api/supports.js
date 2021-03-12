@@ -31,7 +31,7 @@ router.get('/api/supportsList',  async (req, res) => {
           category_arm: data.rows[i].category_arm,
           items: supports.rows
         })
-    }
+    }   
 
       for(j = 0; j < allData.length; j++) {
         for(k = 0; k < allData.length; k++) {
