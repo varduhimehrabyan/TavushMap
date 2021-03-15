@@ -7,11 +7,12 @@ const writeInLogs = require('../../Services/writeInLogs')
 
 router.use(express.json());
 
-router.get('/api/organizations',  async (req, res) => {
+router.post('/api/organizations',  async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.org.usp_organizationsList)
+      const {language} = req.body
+        const data = await pool.query(pgFunctions.org.usp_organizationsList, [language])
         // console.log(data);
-            res.status(200).send({
+            res.send({
                 data: data.rows
             })
     }
@@ -30,7 +31,7 @@ router.post("/api/addOrganization", async (req, res) => {
       } else {
         success = true
       }
-      res.status(200).send({
+      res.send({
         
         id: data.rows[0].id,
         success: success,

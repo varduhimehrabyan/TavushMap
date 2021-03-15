@@ -7,10 +7,11 @@ const writeInLogs = require('../../Services/writeInLogs')
 
 router.use(express.json());
 
-router.get('/api/communities',  async (req, res) => {
+router.post('/api/communities',  async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.communities.usp_communitiesList)
-            res.status(200).send({
+        const {language} = req.body;
+        const data = await pool.query(pgFunctions.communities.usp_communitiesList, [language]);
+            res.send({
                 data: data.rows
             })
     }
@@ -19,10 +20,11 @@ router.get('/api/communities',  async (req, res) => {
     }
 });
 
-router.get('/api/statuses',  async (req, res) => {
+router.post('/api/statuses',  async (req, res) => {
   try {
-      const data = await pool.query(pgFunctions.communities.usp_statusList)
-          res.status(200).send({
+    const {language} = req.body
+      const data = await pool.query(pgFunctions.communities.usp_statusList, [language])
+          res.send({
               data: data.rows
           })
   }
@@ -34,7 +36,7 @@ router.get('/api/statuses',  async (req, res) => {
 router.get('/api/communitiesList',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.communities.usp_communitiesList_eng)
-            res.status(200).send({
+            res.send({
                 data: data.rows
             })
     }
@@ -46,12 +48,19 @@ router.get('/api/communitiesList',  async (req, res) => {
 router.post('/api/programListForFilterEng',  async (req, res) => {
   
     try {
-        const { mappointid } = req.body;
-        // console.log("mappointid: ", mappointid);
-        const data = await pool.query(pgFunctions.programs.usp_programList, [mappointid]);
-          res.status(200).send({
+        const { mappointid, language } = req.body;
+        const arr = [{name: "Տվյալներ չկան"}]
+        const data = await pool.query(pgFunctions.programs.usp_programList, [ mappointid, language ]);
+        if(data.rows.length != 0) {
+          res.send({
             data: data.rows
-          })          
+          }) 
+        } else {
+          res.send({
+            data: arr
+          }) 
+        }
+                   
     }
     catch(err) {
         writeInLogs(err);
@@ -62,7 +71,7 @@ router.post('/api/programListForFilterArm',  async (req, res) => {
     try {
         const { mappointid } = req.body;
         const data = await pool.query(pgFunctions.communities.usp_programListForFilter_arm, [ mappointid ])
-            res.status(200).send({
+            res.send({
               data: data.rows
             })
     }
@@ -75,7 +84,7 @@ router.post("/api/filterArm", async (req, res) => {
     try {
       const { community_arm, status_arm, support_arm } = req.body;
       const data = await pool.query(pgFunctions.communities.usp_filter_arm, [community_arm, status_arm, support_arm]);
-      res.status(200).send({
+      res.send({
         data: data.rows
       });
       
@@ -86,12 +95,9 @@ router.post("/api/filterArm", async (req, res) => {
 
 router.post("/api/filterEng", async (req, res) => {
     try {
-      const { community_eng, status_eng, support_eng } = req.body;
-      // console.log(req.body);
-      console.log(typeof(community_eng[0]));
-      // console.log({ community_eng, status_eng, support_eng });
-      const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_eng, status_eng, support_eng]);
-      res.status(200).send({
+      const { community_id, status_id, support_id } = req.body;
+      const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_id, status_id, support_id]);
+      res.send({
         data: data.rows
       });
       

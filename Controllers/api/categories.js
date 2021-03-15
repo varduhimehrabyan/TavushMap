@@ -10,7 +10,7 @@ router.use(express.json());
 router.get('/api/categories',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.categories.usp_categoriesList)
-            res.status(200).send({
+            res.send({
                 data: data.rows
             })
     }
@@ -29,7 +29,7 @@ router.post("/api/addCategory", async (req, res) => {
       } else {
         success = true
       }
-      res.status(200).send({
+      res.send({
         
         id: data.rows[0].id,
         success: success,

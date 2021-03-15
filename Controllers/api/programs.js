@@ -7,10 +7,23 @@ const writeInLogs = require('../../Services/writeInLogs')
 
 router.use(express.json());
 
-router.get('/api/programs',  async (req, res) => {
+router.get('/api/programsForAdmin', async (req, res) => {
   try {
-      const data = await pool.query(pgFunctions.programs.usp_programList, [null])
-          res.status(200).send({
+      const data = await pool.query(pgFunctions.programs.usp_getProgramsForAdmin)
+          res.send({
+            data: data.rows
+          })
+  }
+  catch(err) {
+      writeInLogs(err);
+  }
+})
+
+router.post('/api/programs',  async (req, res) => {
+  try {
+    const { language } = req.body
+      const data = await pool.query(pgFunctions.programs.usp_programList, [null, language])
+          res.send({
             data: data.rows
           })
   }
@@ -89,7 +102,7 @@ router.post('/api/editProgram',  async (req, res) => {
                 isDonor, organizationid, categoryid, supportid,
                 description_arm, description_eng , status
             ])
-            res.status(200).send({
+            res.send({
                 programid: data.rows[0].programid,
                 personid: data.rows[0].personid,
                 categorySupportid: data.rows[0].categorySupportid,

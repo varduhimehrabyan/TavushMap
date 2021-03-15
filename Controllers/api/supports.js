@@ -9,8 +9,8 @@ router.use(express.json());
 
 router.get('/api/supports',  async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.supports.usp_supportsList)
-            res.status(200).send({
+        const data = await pool.query(pgFunctions.supports.usp_supportsList, [null])
+            res.send({
               data: data.rows
             })
     }
@@ -19,16 +19,16 @@ router.get('/api/supports',  async (req, res) => {
     }
 });
 
-router.get('/api/supportsList',  async (req, res) => {
+router.post('/api/supportsList',  async (req, res) => {
   try {
-      const data = await pool.query(pgFunctions.supports.usp_supportsList);
+    const { language } = req.body;
+      const data = await pool.query(pgFunctions.supports.usp_supportsList, [language]);
       let allData = []
       for(i = 0; i < data.rows.length; i++) {
-        const supports = await pool.query(pgFunctions.supports.usp_supportsListOnly, [data.rows[i].categoryid]);
+        const supports = await pool.query(pgFunctions.supports.usp_supportsListOnly, [data.rows[i].categoryid, language]);
         allData.push({
-          id: data.rows[i].id,
           categoryid: data.rows[i].categoryid,
-          category_arm: data.rows[i].category_arm,
+          category: data.rows[i].category,
           items: supports.rows
         })
     }   
@@ -41,7 +41,7 @@ router.get('/api/supportsList',  async (req, res) => {
         }
       }
 
-      res.send(allData);
+      res.send({data: allData});
   }
   catch(err) {
       writeInLogs(err);
@@ -51,7 +51,7 @@ router.get('/api/supportsList',  async (req, res) => {
 router.get('/api/supportTypes',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.supports.usp_supportTypeList)
-            res.status(200).send({
+            res.send({
                 data: data.rows
             })
     }
@@ -62,9 +62,9 @@ router.get('/api/supportTypes',  async (req, res) => {
 
 router.post('/api/supportListOnly',  async (req, res) => {
     try {
-        const { id } = req.body
-        const data = await pool.query(pgFunctions.supports.usp_supportsListOnly, [id])
-            res.status(200).send({
+        const { id, language } = req.body
+        const data = await pool.query(pgFunctions.supports.usp_supportsListOnly, [id, language])
+            res.send({
                 data: data.rows
             });
     }
@@ -83,7 +83,7 @@ router.post("/api/addSupport", async (req, res) => {
     } else {
       success = true
     }
-    res.status(200).send({
+    res.send({
       
       id: data.rows[0].supportId,
       success: success,

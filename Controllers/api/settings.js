@@ -12,7 +12,7 @@ router.use(express.json());
 router.get('/api/settings',  async (req, res) => {
   try {
       const data = await pool.query(pgFunctions.settings.usp_userInfoList)
-          res.status(200).send({
+          res.send({
             data: data.rows
           })
   }
