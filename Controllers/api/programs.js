@@ -86,21 +86,15 @@ router.delete("/api/deleteProgram/:id", async (req, res) => {
 
 router.put('/api/editProgram',  async (req, res) => {
     try {
-        const { programId, personId, supportId, categoryId,
-                communityId, organizationId, name_arm, name_eng,
-                communityid, budget, start_date, end_date,
-                manager_arm, manager_eng, contactPerson_arm, contactPerson_eng,
-                isDonor, organizationid, categoryid, supportid,
-                description_arm, description_eng , status} = req.body
+        const { id, support, community, organization, programName_arm, 
+          programName_eng, budget, startDate, endDate, manager_arm, manager_eng, 
+          contact_arm, contact_eng, isDonor, description_arm, description_eng, status} = req.body
                 console.log(req.body);
         const data = await pool.query(pgFunctions.programs.usp_addProgram,
             [
-                programId, personId, supportId, categoryId,
-                communityId, organizationId, name_arm, name_eng,
-                communityid, budget, start_date, end_date,
-                manager_arm, manager_eng, contactPerson_arm, contactPerson_eng,
-                isDonor, organizationid, categoryid, supportid,
-                description_arm, description_eng , status
+              id, support, community, organization, programName_arm, 
+              programName_eng, budget, startDate, endDate, manager_arm, manager_eng, 
+              contact_arm, contact_eng, isDonor, description_arm, description_eng, status
             ])
             res.send({
                 programid: data.rows[0].programid,
