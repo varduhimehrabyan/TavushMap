@@ -88,7 +88,7 @@ router.put('/api/editProgram',  async (req, res) => {
     try {
         const { id, support, community, organization, programName_arm, 
           programName_eng, budget, startDate, endDate, manager_arm, manager_eng, 
-          contact_arm, contact_eng, isDonor, description_arm, description_eng, status} = req.body
+          contact_arm, contact_eng, isDonor, description_arm, description_eng, status} = req.body.prog
                 console.log(req.body);
         const data = await pool.query(pgFunctions.programs.usp_addProgram,
             [
