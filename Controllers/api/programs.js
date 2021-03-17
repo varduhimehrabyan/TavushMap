@@ -84,7 +84,7 @@ router.delete("/api/deleteProgram/:id", async (req, res) => {
     }
   });
 
-router.post('/api/editProgram',  async (req, res) => {
+router.put('/api/editProgram',  async (req, res) => {
     try {
         const { programId, personId, supportId, categoryId,
                 communityId, organizationId, name_arm, name_eng,
