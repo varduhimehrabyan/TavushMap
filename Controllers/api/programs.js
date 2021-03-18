@@ -86,26 +86,41 @@ router.delete("/api/deleteProgram/:id", async (req, res) => {
 
 router.put('/api/editProgram',  async (req, res) => {
     try {
+      let communities = [];
+      let organizations = [];
+      let supports = [];
         const { id, support, community, organization, programName_arm, 
           programName_eng, budget, startDate, endDate, manager_arm, manager_eng, 
           contact_arm, contact_eng, isDonor, description_arm, description_eng, status} = req.body.prog
-                console.log(req.body);
-        const data = await pool.query(pgFunctions.programs.usp_addProgram,
+
+          for(i = 0; i < community.length; i++) {
+            communities.push(community[i].communityId)
+          }
+          for(i = 0; i < organization.length; i++) {
+            organizations.push(organization[i].organizationId)
+          }
+          for(i = 0; i < support.length; i++) {
+            supports.push(support[i].supportid)
+          }
+
+          console.log({id, supports, communities, organizations, programName_arm, 
+            programName_eng, budget, startDate, endDate, manager_arm, manager_eng, 
+            contact_arm, contact_eng, isDonor, description_arm, description_eng, status});
+              
+        const data = await pool.query(pgFunctions.programs.usp_editProgram,
             [
-              id, support, community, organization, programName_arm, 
+              id, supports, communities, organizations, programName_arm, 
               programName_eng, budget, startDate, endDate, manager_arm, manager_eng, 
               contact_arm, contact_eng, isDonor, description_arm, description_eng, status
             ])
             res.send({
-                programid: data.rows[0].programid,
-                personid: data.rows[0].personid,
-                categorySupportid: data.rows[0].categorySupportid,
+                programid: data.rows[0].id,
                 success: data.rows[0].success,
                 errorMessage: data.rows[0].errorMessage,
             })
     }
     catch(err) {
-        writeInLogs(err);
+        console.log(err)
     }
 });
 
