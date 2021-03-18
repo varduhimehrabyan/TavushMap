@@ -7,3 +7,12 @@
 03/18/2021  14:50 
   TypeError: Cannot read property 'categoryid' of undefined 
 
+03/18/2021  15:20 
+  TypeError: Cannot read property 'categoryid' of undefined 
+
+03/18/2021  15:22 
+  TypeError: Cannot read property 'categoryid' of undefined 
+
+03/18/2021  15:41 
+  TypeError: Cannot read property 'categoryid' of undefined 
+

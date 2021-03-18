@@ -4,8 +4,6 @@ const pool = require('../../Config/database');
 const pgFunctions = require('../../pgFunctions');
 const writeInLogs = require('../../Services/writeInLogs');
 
-// console.log("mailVerify");
-
 router.use(express.json());
 
 router.get('/api/auth/verify',  async (req, res) => {
