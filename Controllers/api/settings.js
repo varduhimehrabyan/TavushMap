@@ -24,10 +24,8 @@ router.get('/api/settings',  async (req, res) => {
 router.post("/api/addUser", async (req, res) => {
     try {
       const { firstName, lastName, email } = req.body;
-      // const hashPassword = await bcrypt.hash(password, 10);
       let success;
       const data = await pool.query(pgFunctions.settings.usp_addUser, [firstName, lastName, email]);
-      // console.log(data);
       if(data.rows[0].success == 0) {
         success = false
       } else {
