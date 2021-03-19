@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const secret = process.env.secret;
+const writeInLogs = require('../Services/writeInLogs')
 
 const createToken = function(res,email,id) {
     try {
@@ -8,7 +9,7 @@ const createToken = function(res,email,id) {
             httpOnly: true,
             });
     } catch(err) {
-        console.log(err);
+        writeInLogs(err);
     }
 }
 

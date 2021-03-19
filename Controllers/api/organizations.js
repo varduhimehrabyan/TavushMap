@@ -11,7 +11,6 @@ router.post('/organizations',  async (req, res) => {
     try {
       const {language} = req.body
         const data = await pool.query(pgFunctions.org.usp_organizationsList, [language])
-        // console.log(data);
             res.send({
                 data: data.rows
             })

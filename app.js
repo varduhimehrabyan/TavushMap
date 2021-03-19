@@ -8,5 +8,4 @@ app.use('/admin/', require('./admin'))
 app.use('/', require('./user'))
 
 app.listen(4000, (req, res) => {
-    console.log("Server running on port 4000")
 });

@@ -15,7 +15,6 @@ router.get("/logout", tokenVerify, async (req, res) => {
       if (!cookie.hasOwnProperty(i)) {
         res.send({ success: false });
       } else {
-        // console.log(req);
         res.clearCookie("token");
         res.send({ success: true });
       }

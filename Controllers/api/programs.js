@@ -41,7 +41,6 @@ router.post('/addProgram',  async (req, res) => {
                 contactPerson_arm, contactPerson_eng,
                 organizationid, categoryid_supportid,
                 description_arm, description_eng, statusid, isdonor } = req.body
-                console.log(req.body);
         const data = await pool.query(pgFunctions.programs.usp_addProgram,
             [
               name_arm, name_eng,
@@ -102,10 +101,6 @@ router.put('/editProgram',  async (req, res) => {
           for(i = 0; i < support.length; i++) {
             supports.push(support[i].supportid)
           }
-
-          console.log({id, supports, communities, organizations, programName_arm, 
-            programName_eng, budget, startDate, endDate, manager_arm, manager_eng, 
-            contact_arm, contact_eng, isDonor, description_arm, description_eng, status});
               
         const data = await pool.query(pgFunctions.programs.usp_editProgram,
             [
@@ -120,7 +115,7 @@ router.put('/editProgram',  async (req, res) => {
             })
     }
     catch(err) {
-        console.log(err)
+        writeInLogs(err)
     }
 });
 

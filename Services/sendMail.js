@@ -17,10 +17,8 @@ module.exports = (email, id) => {
 
     if (id) {
 
-        console.log("id is exist");
         let tokenGmail = jwt.sign({ id }, gmailSecret, { expiresIn: '1h' })
         let link = `${process.env.host}/confirmPassword?id=${id}&code=${tokenGmail}`
-        console.log("link: ", link);
 
         mailOptions = {
             from: "test.fish.farm@gmail.com",
@@ -30,7 +28,6 @@ module.exports = (email, id) => {
         }
 
     } else {
-        console.log("id is not exist");
         mailOptions = {
             from: "test.fish.farm@gmail.com",
             to: email,

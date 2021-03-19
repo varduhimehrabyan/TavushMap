@@ -35,7 +35,6 @@ router.post('/login', async (req, res) => {
         }
 
     } catch (err) {
-        console.log(err);
         res.status(500).send('Invalid password')
     }
 

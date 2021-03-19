@@ -16,3 +16,12 @@
 03/19/2021  11:25 
   error: invalid input syntax for integer: "" 
 
+03/19/2021  11:52 
+  TypeError: Cannot read property 'categoryid' of undefined 
+
+03/19/2021  11:53 
+  error: invalid input syntax for integer: "" 
+
+03/19/2021  11:54 
+  TypeError: Cannot read property 'categoryid' of undefined 
+
