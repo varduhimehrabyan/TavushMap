@@ -6,8 +6,8 @@ const writeInLogs = require('../../Services/writeInLogs');
 
 router.use(express.json());
 
-router.get('/api/auth/verify',  async (req, res) => {
-    console.log("/api/auth/verify");
+router.get('/auth/verify',  async (req, res) => {
+    console.log("/auth/verify");
     var setActive;
   try {
     let gmailSecretForVerify = process.env.gmailSecret;

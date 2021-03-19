@@ -7,7 +7,7 @@ const writeInLogs = require('../../Services/writeInLogs')
 
 router.use(express.json());
 
-router.get('/api/categories',  async (req, res) => {
+router.get('/categories',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.categories.usp_categoriesList)
             res.send({
@@ -19,7 +19,7 @@ router.get('/api/categories',  async (req, res) => {
     }
 });
 
-router.post("/api/addCategory", async (req, res) => {
+router.post("/addCategory", async (req, res) => {
     try {
       const { category_eng , category_arm } = req.body;
       let success;
@@ -41,7 +41,7 @@ router.post("/api/addCategory", async (req, res) => {
     }
   });
 
-  router.delete("/api/deleteCategory/:id", async (req, res) => {
+  router.delete("/deleteCategory/:id", async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -60,7 +60,7 @@ router.post("/api/addCategory", async (req, res) => {
     }
   });
 
-  router.put("/api/editCategory", async (req, res) => {
+  router.put("/editCategory", async (req, res) => {
     try {
       const { id, category_eng, category_arm } = req.body;
       let success;

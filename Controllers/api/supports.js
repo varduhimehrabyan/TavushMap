@@ -7,7 +7,7 @@ const writeInLogs = require('../../Services/writeInLogs')
 
 router.use(express.json());
 
-router.get('/api/supports',  async (req, res) => {
+router.get('/supports',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.supports.usp_supportsList, [null])
             res.send({
@@ -19,7 +19,7 @@ router.get('/api/supports',  async (req, res) => {
     }
 });
 
-router.post('/api/supportsList',  async (req, res) => {
+router.post('/supportsList',  async (req, res) => {
   try {
     const { language } = req.body;
       const data = await pool.query(pgFunctions.supports.usp_supportsList, [language]);
@@ -48,7 +48,7 @@ router.post('/api/supportsList',  async (req, res) => {
   }
 });
 
-router.get('/api/supportTypes',  async (req, res) => {
+router.get('/supportTypes',  async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.supports.usp_supportTypeList)
             res.send({
@@ -60,7 +60,7 @@ router.get('/api/supportTypes',  async (req, res) => {
     }
 });
 
-router.post('/api/supportListOnly',  async (req, res) => {
+router.post('/supportListOnly',  async (req, res) => {
     try {
         const { id, language } = req.body
         const data = await pool.query(pgFunctions.supports.usp_supportsListOnly, [id, language])
@@ -73,7 +73,7 @@ router.post('/api/supportListOnly',  async (req, res) => {
     }
 });
 
-router.post("/api/addSupport", async (req, res) => {
+router.post("/addSupport", async (req, res) => {
   try {
     const { support_eng, support_arm, categoryid } = req.body;
     let success;
@@ -95,7 +95,7 @@ router.post("/api/addSupport", async (req, res) => {
   }
 });
 
-router.delete("/api/deleteSupport/:id", async (req, res) => {
+router.delete("/deleteSupport/:id", async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -114,7 +114,7 @@ router.delete("/api/deleteSupport/:id", async (req, res) => {
     }
   });
 
-router.put("/api/editSupport", async (req, res) => {
+router.put("/editSupport", async (req, res) => {
     try {
       const { id, support_eng, support_arm, categoryid_old, categoryid_new } = req.body;
       let success;

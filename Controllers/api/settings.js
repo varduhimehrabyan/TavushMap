@@ -9,7 +9,7 @@ const sendMail = require('../../Services/sendMail');
 
 router.use(express.json());
 
-router.get('/api/settings',  async (req, res) => {
+router.get('/settings',  async (req, res) => {
   try {
       const data = await pool.query(pgFunctions.settings.usp_userInfoList)
           res.send({
@@ -21,7 +21,7 @@ router.get('/api/settings',  async (req, res) => {
   }
 });
 
-router.post("/api/addUser", async (req, res) => {
+router.post("/addUser", async (req, res) => {
     try {
       const { firstName, lastName, email } = req.body;
       let success;
@@ -45,7 +45,7 @@ router.post("/api/addUser", async (req, res) => {
     }
   });
 
-router.post("/api/setPassword", async (req, res) => {
+router.post("/setPassword", async (req, res) => {
     try {
       const { id, password } = req.body;
       const hashPassword = await bcrypt.hash(password, 10);
@@ -67,7 +67,7 @@ router.post("/api/setPassword", async (req, res) => {
     }
 });
 
-router.put("/api/changePassword", async (req, res) => {
+router.put("/changePassword", async (req, res) => {
     try {
       const { id, password } = req.body;
       const hashPassword = await bcrypt.hash(password, 10);
@@ -88,7 +88,7 @@ router.put("/api/changePassword", async (req, res) => {
     }
   });
 
-router.delete("/api/deleteUser/:id", async (req, res) => {
+router.delete("/deleteUser/:id", async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -107,17 +107,7 @@ router.delete("/api/deleteUser/:id", async (req, res) => {
     }
 });
 
-// router.put("/api/changePassword", async (req, res) => {
-//     try {
-//       const { id, password } = req.body;
-//       const correctPassword = await bcrypt.compare(password,result.rows[0].password);
-//       console.log(users);
-//     } catch (err) {
-//       writeInLogs(err);
-//     }
-//   });
-
-  router.put("/api/editUserInfo", async (req, res) => {
+  router.put("/editUserInfo", async (req, res) => {
     try {
       const { id, firstName, lastName } = req.body;
       let success;

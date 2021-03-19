@@ -7,7 +7,7 @@ const writeInLogs = require('../../Services/writeInLogs')
 
 router.use(express.json());
 
-router.get('/api/programsForAdmin', async (req, res) => {
+router.get('/programsForAdmin', async (req, res) => {
   try {
       const data = await pool.query(pgFunctions.programs.usp_getProgramsForAdmin)
           res.send({
@@ -19,7 +19,7 @@ router.get('/api/programsForAdmin', async (req, res) => {
   }
 })
 
-router.post('/api/programs',  async (req, res) => {
+router.post('/programs',  async (req, res) => {
   try {
     const { language } = req.body
       const data = await pool.query(pgFunctions.programs.usp_programList, [null, language])
@@ -32,7 +32,7 @@ router.post('/api/programs',  async (req, res) => {
   }
 });
 
-router.post('/api/addProgram',  async (req, res) => {
+router.post('/addProgram',  async (req, res) => {
     try {
         const { name_arm, name_eng,
                 communityid, budget,
@@ -65,7 +65,7 @@ router.post('/api/addProgram',  async (req, res) => {
     }
 });
 
-router.delete("/api/deleteProgram/:id", async (req, res) => {
+router.delete("/deleteProgram/:id", async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -84,7 +84,7 @@ router.delete("/api/deleteProgram/:id", async (req, res) => {
     }
   });
 
-router.put('/api/editProgram',  async (req, res) => {
+router.put('/editProgram',  async (req, res) => {
     try {
       let communities = [];
       let organizations = [];

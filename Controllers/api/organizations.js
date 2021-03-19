@@ -7,7 +7,7 @@ const writeInLogs = require('../../Services/writeInLogs')
 
 router.use(express.json());
 
-router.post('/api/organizations',  async (req, res) => {
+router.post('/organizations',  async (req, res) => {
     try {
       const {language} = req.body
         const data = await pool.query(pgFunctions.org.usp_organizationsList, [language])
@@ -21,7 +21,7 @@ router.post('/api/organizations',  async (req, res) => {
     }
 })
 
-router.post("/api/addOrganization", async (req, res) => {
+router.post("/addOrganization", async (req, res) => {
     try {
       const { nameArm, nameEng, person } = req.body;
       let success;
@@ -43,7 +43,7 @@ router.post("/api/addOrganization", async (req, res) => {
     }
   });
 
-  router.delete("/api/deleteOrganization/:id", async (req, res) => {
+  router.delete("/deleteOrganization/:id", async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -62,7 +62,7 @@ router.post("/api/addOrganization", async (req, res) => {
     }
   });
 
-  router.put("/api/editOrganization", async (req, res) => {
+  router.put("/editOrganization", async (req, res) => {
     try {
       const { id, nameArm, nameEng, person } = req.body;
       let success;
