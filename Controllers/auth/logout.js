@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express();
 const cookieParser = require("cookie-parser");
-const tokenVerify = require("../../MiddleWare/tokenVerify");
+const tokenVerify = require('../../MiddleWare/tokenVerify');
 
 router.use(express.json());
 router.use(cookieParser());

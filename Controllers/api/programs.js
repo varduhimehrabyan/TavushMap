@@ -3,7 +3,7 @@ const router = express();
 const pool = require('../../Config/database');
 const pgFunctions = require('../../pgFunctions');
 const writeInLogs = require('../../Services/writeInLogs')
-// const tokenVerify = require('../../MiddleWare/tokenVerify');
+const tokenVerify = require('../../MiddleWare/tokenVerify');
 
 router.use(express.json());
 

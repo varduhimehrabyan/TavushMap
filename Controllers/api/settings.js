@@ -5,7 +5,7 @@ const pgFunctions = require('../../pgFunctions');
 const writeInLogs = require('../../Services/writeInLogs');
 const bcrypt = require('bcrypt');
 const sendMail = require('../../Services/sendMail');
-// const tokenVerify = require('../../MiddleWare/tokenVerify');
+const tokenVerify = require('../../MiddleWare/tokenVerify');
 
 router.use(express.json());
 

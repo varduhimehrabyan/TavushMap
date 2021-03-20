@@ -3,7 +3,7 @@ const router = express();
 const pool = require('../../Config/database');
 const pgFunctions = require('../../pgFunctions');
 const writeInLogs = require('../../Services/writeInLogs')
-// const tokenVerify = require('../../MiddleWare/tokenVerify');
+const tokenVerify = require('../../MiddleWare/tokenVerify');
 
 router.use(express.json());
 
@@ -32,15 +32,6 @@ router.post('/supportsList',  async (req, res) => {
           items: supports.rows
         })
     }   
-
-      // for(j = 0; j < allData.length; j++) {
-      //   for(k = 0; k < allData.length; k++) {
-      //     if(allData[k].id == allData[j].id) {
-      //         allData.splice(j, 1)
-      //     } 
-      //   }
-      // }
-
       res.send({data: allData});
   }
   catch(err) {
