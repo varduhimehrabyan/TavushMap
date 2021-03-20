@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secret = process.env.secret;
+const secret = global.env.secret;
 const writeInLogs = require('../Services/writeInLogs')
 
 const createToken = function(res,email,id) {

@@ -9,11 +9,11 @@ router.use(express.json());
 router.get('/auth/verify',  async (req, res) => {
     var setActive;
   try {
-    let gmailSecretForVerify = process.env.gmailSecret;
+    let gmailSecretForVerify = global.env.gmailSecret;
     let code = req.query.code;
 
     jwt.verify(code, gmailSecretForVerify, async (err, data) => {
-        const host = process.env.host;
+        const host = global.env.host;
 
         if (err) {
             res.clearCookie('token');
@@ -23,7 +23,7 @@ router.get('/auth/verify',  async (req, res) => {
         if(data) {
             let id = parseInt(req.query.id);
             try {
-                const token = jwt.sign({ id }, process.env.secret);
+                const token = jwt.sign({ id }, global.env.secret);
                 setActive = await pool.query(pgFunctions.settings.usp_makeActive, [id]);
                 if (setActive.rows[0].success == 1) {
                     try {

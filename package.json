@@ -19,7 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "nodemailer": "^6.5.0",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "secure-env": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

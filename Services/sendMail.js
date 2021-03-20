@@ -5,7 +5,7 @@ const writeInLogs = require('./writeInLogs');
 
 module.exports = (email, id) => {
 
-    let gmailSecret = process.env.gmailSecret
+    let gmailSecret = global.env.gmailSecret
 
     var transport = nodemailer.createTransport({
         service: "gmail",
@@ -18,7 +18,7 @@ module.exports = (email, id) => {
     if (id) {
 
         let tokenGmail = jwt.sign({ id }, gmailSecret, { expiresIn: '1h' })
-        let link = `${process.env.host}/confirmPassword?id=${id}&code=${tokenGmail}`
+        let link = `${global.env.host}/confirmPassword?id=${id}&code=${tokenGmail}`
 
         mailOptions = {
             from: "test.fish.farm@gmail.com",
