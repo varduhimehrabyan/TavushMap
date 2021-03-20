@@ -9,7 +9,7 @@ const tokenVerify = require('../../MiddleWare/tokenVerify');
 
 router.use(express.json());
 
-router.get('/settings',  async (req, res) => {
+router.get('/settings', tokenVerify, async (req, res) => {
   try {
       const data = await pool.query(pgFunctions.settings.usp_userInfoList)
           res.send({

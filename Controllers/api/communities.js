@@ -7,7 +7,7 @@ const tokenVerify = require('../../MiddleWare/tokenVerify');
 
 router.use(express.json());
 
-router.post('/communities',  async (req, res) => {
+router.post('/communities', tokenVerify, async (req, res) => {
     try {
         const {language} = req.body;
         const data = await pool.query(pgFunctions.communities.usp_communitiesList, [language]);

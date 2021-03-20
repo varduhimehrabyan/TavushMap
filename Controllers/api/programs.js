@@ -7,7 +7,7 @@ const tokenVerify = require('../../MiddleWare/tokenVerify');
 
 router.use(express.json());
 
-router.get('/programsForAdmin', async (req, res) => {
+router.get('/programsForAdmin', tokenVerify, async (req, res) => {
   try {
       const data = await pool.query(pgFunctions.programs.usp_getProgramsForAdmin)
           res.send({
