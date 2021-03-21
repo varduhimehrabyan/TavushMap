@@ -7,5 +7,4 @@ app.use('/api', require('./Controllers'))
 app.use('/admin', require('./admin'))
 app.use('/', require('./user'))
 
-app.listen(4000, (req, res) => {
-});
+app.listen(4000);

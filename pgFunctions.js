@@ -14,7 +14,7 @@ module.exports = {
     usp_programListForFilter_eng: 'SELECT * FROM "usp_programListForFilter_eng"($1)',
     usp_programListForFilter_arm: 'SELECT * FROM "usp_programListForFilter_arm"($1)',
     usp_filter_arm: 'SELECT * FROM "usp_filter_arm"($1, $2, $3)',  
-    usp_filter_eng: 'SELECT * FROM "usp_filter_eng"($1, $2, $3)', 
+    usp_filter_eng: 'SELECT * FROM "usp_filter_eng"($1, $2, $3, $4)', 
     usp_statusList: 'SELECT * FROM "usp_statusList"($1)',
   },
   supports: {

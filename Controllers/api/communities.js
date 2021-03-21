@@ -95,8 +95,8 @@ router.post("/filterArm", tokenVerify, async (req, res) => {
 
 router.post("/filterEng", tokenVerify, async (req, res) => {
     try {
-      const { community_id, status_id, support_id } = req.body;
-      const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_id, status_id, support_id]);
+      const { communityid, statusid, supportid, organizationid } = req.body;
+      const data = await pool.query(pgFunctions.communities.usp_filter_eng, [communityid, statusid, supportid, organizationid]);
       res.send({
         data: data.rows
       });
