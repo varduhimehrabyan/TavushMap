@@ -4,6 +4,7 @@ const pool = require('../../Config/database');
 const pgFunctions = require('../../pgFunctions');
 const writeInLogs = require('../../Services/writeInLogs')
 const tokenVerify = require('../../MiddleWare/tokenVerify');
+const e = require('express');
 
 router.use(express.json());
 
@@ -18,6 +19,33 @@ router.post('/organizations', tokenVerify, async (req, res) => {
     catch(err) {
         writeInLogs(err);
     }
+})
+
+router.get('/organizationsForAdmin', tokenVerify, async (req, res) => {
+  try {
+    let all = [];
+      const eng = await pool.query(pgFunctions.org.usp_organizationsList, ["en"])
+      const arm = await pool.query(pgFunctions.org.usp_organizationsList, ["arm"])
+      for(i = 0; i < eng.rows.length; i++){
+        for(j = 0; j < i; j++){
+        if(eng.rows[i].id == arm.rows[j].id && eng.rows[i].contactPersonId == arm.rows[j].contactPersonId) {
+          all.push({id: eng.rows[i].id, 
+            nameEng: eng.rows[i].name, 
+            nameArm: arm.rows[j].name, 
+            contactPersonId: eng.rows[j].contactPersonId,
+            contactPersonEng: eng.rows[j].contactPerson,
+            contactPersonArm: arm.rows[j].contactPerson})
+        }
+      }
+      }
+      
+          res.send({
+              all: all
+          })
+  }
+  catch(err) {
+      writeInLogs(err);
+  }
 })
 
 router.post("/addOrganization", tokenVerify, async (req, res) => {

@@ -28,7 +28,7 @@ module.exports = {
   programs: {
     usp_getProgramsForAdmin: 'SELECT * FROM "usp_getProgramsForAdmin"()',
     usp_addProgram: 'SELECT * FROM "usp_addProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)',
-    usp_programList: 'SELECT * FROM "usp_programList"($1, $2, $3, $4)',
+    usp_programList: 'SELECT * FROM "usp_programList"($1, $2, $3, $4, $5)',
     usp_editProgram: 'SELECT * FROM "usp_editProgram"($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)',
     usp_deleteProgram: 'SELECT * FROM "usp_deleteProgram"($1)',
   },
