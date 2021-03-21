@@ -48,9 +48,9 @@ router.get('/communitiesList', tokenVerify, async (req, res) => {
 router.post('/programListForFilterEng', tokenVerify,  async (req, res) => {
   
     try {
-        const { mappointid, language } = req.body;
+        const { mappointid, language, statusid, supportid } = req.body;
         const arr = [{name: "Տվյալներ չկան"}]
-        const data = await pool.query(pgFunctions.programs.usp_programList, [ mappointid, language ]);
+        const data = await pool.query(pgFunctions.programs.usp_programList, [ mappointid, language, statusid, supportid ]);
         if(data.rows.length != 0) {
           res.send({
             data: data.rows

@@ -22,7 +22,7 @@ router.get('/programsForAdmin', tokenVerify, async (req, res) => {
 router.post('/programs', tokenVerify, async (req, res) => {
   try {
     const { language } = req.body
-      const data = await pool.query(pgFunctions.programs.usp_programList, [null, language])
+      const data = await pool.query(pgFunctions.programs.usp_programList, [null, language, null, null])
           res.send({
             data: data.rows
           })
