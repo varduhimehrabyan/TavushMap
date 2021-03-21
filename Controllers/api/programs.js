@@ -19,7 +19,7 @@ router.get('/programsForAdmin', tokenVerify, async (req, res) => {
   }
 })
 
-router.post('/programs',  async (req, res) => {
+router.post('/programs', tokenVerify, async (req, res) => {
   try {
     const { language } = req.body
       const data = await pool.query(pgFunctions.programs.usp_programList, [null, language])
@@ -32,7 +32,7 @@ router.post('/programs',  async (req, res) => {
   }
 });
 
-router.post('/addProgram',  async (req, res) => {
+router.post('/addProgram', tokenVerify, async (req, res) => {
     try {
         const { name_arm, name_eng,
                 communityid, budget,
@@ -64,7 +64,7 @@ router.post('/addProgram',  async (req, res) => {
     }
 });
 
-router.delete("/deleteProgram/:id", async (req, res) => {
+router.delete("/deleteProgram/:id", tokenVerify, async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -83,7 +83,7 @@ router.delete("/deleteProgram/:id", async (req, res) => {
     }
   });
 
-router.put('/editProgram',  async (req, res) => {
+router.put('/editProgram', tokenVerify, async (req, res) => {
     try {
       let communities = [];
       let organizations = [];

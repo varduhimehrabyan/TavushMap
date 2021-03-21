@@ -20,7 +20,7 @@ router.post('/organizations', tokenVerify, async (req, res) => {
     }
 })
 
-router.post("/addOrganization", async (req, res) => {
+router.post("/addOrganization", tokenVerify, async (req, res) => {
     try {
       const { nameArm, nameEng, person } = req.body;
       let success;
@@ -42,7 +42,7 @@ router.post("/addOrganization", async (req, res) => {
     }
   });
 
-  router.delete("/deleteOrganization/:id", async (req, res) => {
+  router.delete("/deleteOrganization/:id", tokenVerify, async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -61,7 +61,7 @@ router.post("/addOrganization", async (req, res) => {
     }
   });
 
-  router.put("/editOrganization", async (req, res) => {
+  router.put("/editOrganization", tokenVerify, async (req, res) => {
     try {
       const { id, nameArm, nameEng, person } = req.body;
       let success;

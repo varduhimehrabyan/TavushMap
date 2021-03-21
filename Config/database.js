@@ -3,7 +3,6 @@ const secureEnv = require('secure-env');
 global.env = secureEnv({secret:'Vh-67VTW4fGVVK6fW7Ls'});;
 const { Pool } = require("pg")
 
-
 const pool = new Pool({
     host: global.env.dbhost,
     user: global.env.user,

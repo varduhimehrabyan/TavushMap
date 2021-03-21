@@ -20,7 +20,7 @@ router.post('/communities', tokenVerify, async (req, res) => {
     }
 });
 
-router.post('/statuses',  async (req, res) => {
+router.post('/statuses', tokenVerify,  async (req, res) => {
   try {
     const {language} = req.body
       const data = await pool.query(pgFunctions.communities.usp_statusList, [language])
@@ -33,7 +33,7 @@ router.post('/statuses',  async (req, res) => {
   }
 });
 
-router.get('/communitiesList',  async (req, res) => {
+router.get('/communitiesList', tokenVerify, async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.communities.usp_communitiesList_eng)
             res.send({
@@ -45,7 +45,7 @@ router.get('/communitiesList',  async (req, res) => {
     }
 });
   
-router.post('/programListForFilterEng',  async (req, res) => {
+router.post('/programListForFilterEng', tokenVerify,  async (req, res) => {
   
     try {
         const { mappointid, language } = req.body;
@@ -67,7 +67,7 @@ router.post('/programListForFilterEng',  async (req, res) => {
     }
 });
   
-router.post('/programListForFilterArm',  async (req, res) => {
+router.post('/programListForFilterArm', tokenVerify, async (req, res) => {
     try {
         const { mappointid } = req.body;
         const data = await pool.query(pgFunctions.communities.usp_programListForFilter_arm, [ mappointid ])
@@ -80,7 +80,7 @@ router.post('/programListForFilterArm',  async (req, res) => {
     }
 });
   
-router.post("/filterArm", async (req, res) => {
+router.post("/filterArm", tokenVerify, async (req, res) => {
     try {
       const { community_arm, status_arm, support_arm } = req.body;
       const data = await pool.query(pgFunctions.communities.usp_filter_arm, [community_arm, status_arm, support_arm]);
@@ -93,7 +93,7 @@ router.post("/filterArm", async (req, res) => {
     }
 });
 
-router.post("/filterEng", async (req, res) => {
+router.post("/filterEng", tokenVerify, async (req, res) => {
     try {
       const { community_id, status_id, support_id } = req.body;
       const data = await pool.query(pgFunctions.communities.usp_filter_eng, [community_id, status_id, support_id]);

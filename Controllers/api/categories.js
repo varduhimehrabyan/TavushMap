@@ -19,7 +19,7 @@ router.get('/categories', tokenVerify, async (req, res) => {
     }
 });
 
-router.post("/addCategory", async (req, res) => {
+router.post("/addCategory", tokenVerify, async (req, res) => {
     try {
       const { category_eng , category_arm } = req.body;
       let success;
@@ -41,7 +41,7 @@ router.post("/addCategory", async (req, res) => {
     }
   });
 
-  router.delete("/deleteCategory/:id", async (req, res) => {
+  router.delete("/deleteCategory/:id", tokenVerify, async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -60,7 +60,7 @@ router.post("/addCategory", async (req, res) => {
     }
   });
 
-  router.put("/editCategory", async (req, res) => {
+  router.put("/editCategory", tokenVerify, async (req, res) => {
     try {
       const { id, category_eng, category_arm } = req.body;
       let success;

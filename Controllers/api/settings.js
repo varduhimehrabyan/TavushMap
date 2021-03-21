@@ -21,7 +21,7 @@ router.get('/settings', tokenVerify, async (req, res) => {
   }
 });
 
-router.post("/addUser", async (req, res) => {
+router.post("/addUser", tokenVerify, async (req, res) => {
     try {
       const { firstName, lastName, email } = req.body;
       let success;
@@ -44,7 +44,7 @@ router.post("/addUser", async (req, res) => {
     }
   });
 
-router.post("/setPassword", async (req, res) => {
+router.post("/setPassword", tokenVerify, async (req, res) => {
     try {
       const { id, password } = req.body;
       const hashPassword = await bcrypt.hash(password, 10);
@@ -66,7 +66,7 @@ router.post("/setPassword", async (req, res) => {
     }
 });
 
-router.put("/changePassword", async (req, res) => {
+router.put("/changePassword", tokenVerify, async (req, res) => {
     try {
       const { id, password } = req.body;
       const hashPassword = await bcrypt.hash(password, 10);
@@ -87,7 +87,7 @@ router.put("/changePassword", async (req, res) => {
     }
   });
 
-router.delete("/deleteUser/:id", async (req, res) => {
+router.delete("/deleteUser/:id", tokenVerify, async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -106,7 +106,7 @@ router.delete("/deleteUser/:id", async (req, res) => {
     }
 });
 
-  router.put("/editUserInfo", async (req, res) => {
+  router.put("/editUserInfo", tokenVerify, async (req, res) => {
     try {
       const { id, firstName, lastName } = req.body;
       let success;

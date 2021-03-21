@@ -19,7 +19,7 @@ router.get('/supports', tokenVerify, async (req, res) => {
     }
 });
 
-router.post('/supportsList',  async (req, res) => {
+router.post('/supportsList', tokenVerify, async (req, res) => {
   try {
     const { language } = req.body;
       const data = await pool.query(pgFunctions.supports.usp_supportsList, [language]);
@@ -39,7 +39,7 @@ router.post('/supportsList',  async (req, res) => {
   }
 });
 
-router.get('/supportTypes',  async (req, res) => {
+router.get('/supportTypes', tokenVerify, async (req, res) => {
     try {
         const data = await pool.query(pgFunctions.supports.usp_supportTypeList)
             res.send({
@@ -51,7 +51,7 @@ router.get('/supportTypes',  async (req, res) => {
     }
 });
 
-router.post('/supportListOnly',  async (req, res) => {
+router.post('/supportListOnly', tokenVerify, async (req, res) => {
     try {
         const { id, language } = req.body
         const data = await pool.query(pgFunctions.supports.usp_supportsListOnly, [id, language])
@@ -64,7 +64,7 @@ router.post('/supportListOnly',  async (req, res) => {
     }
 });
 
-router.post("/addSupport", async (req, res) => {
+router.post("/addSupport", tokenVerify, async (req, res) => {
   try {
     const { support_eng, support_arm, categoryid } = req.body;
     let success;
@@ -86,7 +86,7 @@ router.post("/addSupport", async (req, res) => {
   }
 });
 
-router.delete("/deleteSupport/:id", async (req, res) => {
+router.delete("/deleteSupport/:id", tokenVerify, async (req, res) => {
     try {
       const { id } = req.params;
       let success;
@@ -105,7 +105,7 @@ router.delete("/deleteSupport/:id", async (req, res) => {
     }
   });
 
-router.put("/editSupport", async (req, res) => {
+router.put("/editSupport", tokenVerify, async (req, res) => {
     try {
       const { id, support_eng, support_arm, categoryid_old, categoryid_new } = req.body;
       let success;
