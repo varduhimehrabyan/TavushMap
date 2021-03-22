@@ -11,9 +11,13 @@ router.use(express.json());
 router.post('/organizations', tokenVerify, async (req, res) => {
     try {
       const {language} = req.body
+      let arr = []
         const data = await pool.query(pgFunctions.org.usp_organizationsList, [language])
+        for(i = 0; i < data.rows.length; i++) {
+          arr.push({id: data.rows[i].id, name: data.rows[i].name})
+        }
             res.send({
-                data: data.rows
+                data: arr
             })
     }
     catch(err) {
@@ -27,14 +31,13 @@ router.get('/organizationsForAdmin', tokenVerify, async (req, res) => {
       const eng = await pool.query(pgFunctions.org.usp_organizationsList, ["en"])
       const arm = await pool.query(pgFunctions.org.usp_organizationsList, ["arm"])
       for(i = 0; i < eng.rows.length; i++){
-        for(j = 0; j < i; j++){
-        if(eng.rows[i].id == arm.rows[j].id && eng.rows[i].contactPersonId == arm.rows[j].contactPersonId) {
-          all.push({id: eng.rows[i].id, 
+        for(j = 0; j < arm.rows.length; j++){
+        if(eng.rows[i].id == arm.rows[j].id) {
+          all.push({
+            id: eng.rows[i].id, 
             nameEng: eng.rows[i].name, 
             nameArm: arm.rows[j].name, 
-            contactPersonId: eng.rows[j].contactPersonId,
-            contactPersonEng: eng.rows[j].contactPerson,
-            contactPersonArm: arm.rows[j].contactPerson})
+            contactPersonArm: arm.rows[j].contactPerson })
         }
       }
       }

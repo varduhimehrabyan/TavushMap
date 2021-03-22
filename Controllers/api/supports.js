@@ -19,6 +19,18 @@ router.get('/supports', tokenVerify, async (req, res) => {
     }
 });
 
+router.get('/supportsForAdmin', tokenVerify, async (req, res) => {
+    try {
+        const data = await pool.query(pgFunctions.supports.usp_supportsList, ["arm"])
+            res.send({
+              data: data.rows
+            })
+    }
+    catch(err) {
+        writeInLogs(err);
+    }
+});
+
 router.post('/supportsList', tokenVerify, async (req, res) => {
   try {
     const { language } = req.body;
@@ -31,7 +43,7 @@ router.post('/supportsList', tokenVerify, async (req, res) => {
           category: data.rows[i].category,
           items: supports.rows
         })
-    }   
+    } 
       res.send({data: allData});
   }
   catch(err) {
