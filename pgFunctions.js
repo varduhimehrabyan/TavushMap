@@ -18,7 +18,8 @@ module.exports = {
     usp_statusList: 'SELECT * FROM "usp_statusList"($1)',
   },
   supports: {
-    usp_supportsList: 'SELECT * FROM "usp_supportsList"($1)',    
+    usp_supportsList: 'SELECT * FROM "usp_supportsList"($1)',   
+    usp_getSupports: 'SELECT * FROM "usp_getSupports"()', 
     usp_supportTypeList: 'SELECT * FROM "usp_supportTypeList"()',
     usp_supportsListOnly: 'SELECT * FROM "usp_supportsListOnly"($1, $2)',
     usp_editSupport: 'SELECT * FROM "usp_editSupport"($1, $2, $3, $4, $5)',

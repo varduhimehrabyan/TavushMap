@@ -21,7 +21,7 @@ router.get('/supports', tokenVerify, async (req, res) => {
 
 router.get('/supportsForAdmin', tokenVerify, async (req, res) => {
     try {
-        const data = await pool.query(pgFunctions.supports.usp_supportsList, ["arm"])
+        const data = await pool.query(pgFunctions.supports.usp_getSupports)
             res.send({
               data: data.rows
             })
@@ -35,16 +35,8 @@ router.post('/supportsList', tokenVerify, async (req, res) => {
   try {
     const { language } = req.body;
       const data = await pool.query(pgFunctions.supports.usp_supportsList, [language]);
-      let allData = []
-      for(i = 0; i < data.rows.length; i++) {
-        const supports = await pool.query(pgFunctions.supports.usp_supportsListOnly, [data.rows[i].categoryid, language]);
-        allData.push({
-          categoryid: data.rows[i].categoryid,
-          category: data.rows[i].category,
-          items: supports.rows
-        })
-    } 
-      res.send({data: allData});
+    console.log({data});
+      res.send({data: data.rows});
   }
   catch(err) {
       writeInLogs(err);

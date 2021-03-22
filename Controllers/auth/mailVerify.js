@@ -40,12 +40,12 @@ router.get('/auth/verify',  async (req, res) => {
                 } else if (setActive.rows[0].success == 0 && setActive.rows[0].exists == 1) {
                     res.clearCookie('token')
 
-                    res.redirect(`${host}/password`)
+                    res.redirect(`${host}/confirmPassword`) // password confirmation page
 
                 } else if (setActive.rows[0].success == 0 && setActive.rows[0].exists == 0) {
                     res.clearCookie('token')
 
-                    res.redirect(`${host}/organization`)
+                    res.redirect(`${host}//admin/organization`)
                 }
             } catch (err) {
                 if (!setActive) {
