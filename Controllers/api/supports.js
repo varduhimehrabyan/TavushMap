@@ -35,7 +35,6 @@ router.post('/supportsList', tokenVerify, async (req, res) => {
   try {
     const { language } = req.body;
       const data = await pool.query(pgFunctions.supports.usp_supportsList, [language]);
-    console.log({data});
       res.send({data: data.rows});
   }
   catch(err) {
