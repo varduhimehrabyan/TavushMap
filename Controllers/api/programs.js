@@ -41,13 +41,6 @@ router.post('/addProgram', tokenVerify, async (req, res) => {
                 contactPerson_arm, contactPerson_eng,
                 organizationid, categoryid_supportid,
                 description_arm, description_eng, statusid, isdonor } = req.body
-                console.log("body: ",{name_arm, name_eng,
-                  communityid, budget,
-                  start_date, end_date,
-                  manager_arm, manager_eng,
-                  contactPerson_arm, contactPerson_eng,
-                  organizationid, categoryid_supportid,
-                  description_arm, description_eng, statusid, isdonor});
 
         const data = await pool.query(pgFunctions.programs.usp_addProgram,
             [

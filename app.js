@@ -7,8 +7,8 @@ app.use(express.static('./client/user'))
 
 app.use('/api', require('./Controllers'))
 
-app.use('/dmn/', require('./dmn'))
-app.use('/user/', require('./user'))
+// app.use('/dmn/', require('./dmn'))
+// app.use('*', require('./user'))
 
 app.listen(4000, () => {
 console.log("Server started")
