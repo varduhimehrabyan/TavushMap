@@ -13,23 +13,23 @@ const pgFunctions = require('../../pgFunctions')
 
 router.post('/login', async (req, res) => {
     try {
-        
+
         const { email, password } = req.body
-        
-        const user = await pool.query(pgFunctions.login.usp_login,[email])
+
+        const user = await pool.query(pgFunctions.login.usp_login, [email])
         if (user.rowCount == 0) {
-            res.status(404).send(`no email`)
+            res.status(404).send({ success: false, errorMessage: "No email" })
 
         } else {
 
             const passwordValid = await bcrypt.compare(password, user.rows[0].password)
             if (passwordValid) {
 
-                const token = createToken(res,email,user.rows[0].Id)
+                const token = createToken(res, email, user.rows[0].Id)
 
-                res.status(200).json(` ${user.rows[0].Id} ${user.rows[0].Email} `)
+                res.status(200).json({ success: true })
             } else {
-                res.status(403).send('Invalid password')
+                res.status(403).send({ success: false, errorMessage: "Invalid username or password" })
 
             }
         }

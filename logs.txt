@@ -43,3 +43,15 @@
 03/23/2021  11:13 
   error: invalid input syntax for integer: "" 
 
+03/25/2021  15:14 
+  error: function usp_editSupport(unknown, unknown, unknown, unknown, unknown) does not exist 
+
+03/25/2021  15:23 
+  error: invalid input syntax for integer: "Ընթացիկ" 
+
+03/25/2021  15:32 
+  error: invalid input syntax for integer: "Ընթացիկ" 
+
+03/25/2021  15:35 
+  ReferenceError: status is not defined 
+
