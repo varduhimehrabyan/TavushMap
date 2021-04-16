@@ -6,6 +6,7 @@ router.use(express.json());
 
 router.use(express.static("client/dmn"))
 router.get("*", (req, res) => {
+    console.log('dmn');
     res.sendFile(path.resolve(__dirname, "client", "dmn", "index.html"))
 })
 

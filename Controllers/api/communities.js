@@ -49,18 +49,10 @@ router.post('/programListForFilterEng', tokenVerify,  async (req, res) => {
   
     try {
         const { mappointid, language, statusid, supportid, organizationid } = req.body;
-        const arr = [{name: "Տվյալներ չկան"}]
         const data = await pool.query(pgFunctions.programs.usp_programList, [ mappointid, language, statusid, supportid, organizationid ]);
-        if(data.rows.length != 0) {
           res.send({
             data: data.rows
-          }) 
-        } else {
-          res.send({
-            data: arr
-          }) 
-        }
-                   
+          })      
     }
     catch(err) {
         writeInLogs(err);
@@ -105,6 +97,7 @@ router.post("/filterEng", tokenVerify, async (req, res) => {
       writeInLogs(err);
     }
 });
+
 
 
 module.exports = router;

@@ -12,7 +12,6 @@ router.use(cookieParser());
 router.get('/token', async (req, res) => {
     try {
         if (req.headers.cookie) {
-            // .log(req.cookies);
             let currentToken = req.cookies.token
             jwt.verify(currentToken, secret, function (err, decoded) {
                 if (err) {
