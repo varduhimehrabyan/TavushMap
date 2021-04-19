@@ -1,7 +1,7 @@
 require('dotenv').config()
 // const secureEnv = require('secure-env');
 // global.env = secureEnv({secret:'Vh-67VTW4fGVVK6fW7Ls'});
-global.env = process.env        
+global.env = process.env
 const { Pool } = require("pg")
 
 const pool = new Pool({
@@ -12,7 +12,8 @@ const pool = new Pool({
     port: global.env.port
 })
 
-module.exports=pool
+console.log(global.env.dbhost)
+module.exports = pool
 
 
 
