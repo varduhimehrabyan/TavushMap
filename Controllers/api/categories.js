@@ -62,9 +62,9 @@ router.post("/addCategory", tokenVerify, async (req, res) => {
 
   router.put("/editCategory", tokenVerify, async (req, res) => {
     try {
-      const { id, category_eng, category_arm } = req.body;
+      const { category } = req.body;
       let success;
-      const data = await pool.query(pgFunctions.categories.usp_editCategory, [id, category_eng, category_arm]);
+      const data = await pool.query(pgFunctions.categories.usp_editCategory, [category.id, category.name_eng, category.name_arm]);
       if(data.rows[0].success == 0) {
         success = false
       } else {

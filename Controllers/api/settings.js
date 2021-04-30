@@ -1,23 +1,22 @@
-const express = require('express');
+const express = require("express");
 const router = express();
-const pool = require('../../Config/database');
-const pgFunctions = require('../../pgFunctions');
-const writeInLogs = require('../../Services/writeInLogs');
-const bcrypt = require('bcrypt');
-const sendMail = require('../../Services/sendMail');
-const tokenVerify = require('../../MiddleWare/tokenVerify');
+const pool = require("../../Config/database");
+const pgFunctions = require("../../pgFunctions");
+const writeInLogs = require("../../Services/writeInLogs");
+const bcrypt = require("bcrypt");
+const sendMail = require("../../Services/sendMail");
+const tokenVerify = require("../../MiddleWare/tokenVerify");
 
 router.use(express.json());
 
-router.get('/settings', tokenVerify, async (req, res) => {
+router.get("/settings", tokenVerify, async (req, res) => {
   try {
-      const data = await pool.query(pgFunctions.settings.usp_userInfoList)
-          res.send({
-            data: data.rows
-          })
-  }
-  catch(err) {
-      writeInLogs(err);
+    const data = await pool.query(pgFunctions.settings.usp_userInfoList);
+    res.send({
+      data: data.rows,
+    });
+  } catch (err) {
+    writeInLogs(err);
   }
 });
 
@@ -25,20 +24,23 @@ router.post("/addUser", tokenVerify, async (req, res) => {
   try {
     const { firstName, lastName, email } = req.body;
     let success;
-    const data = await pool.query(pgFunctions.settings.usp_addUser, [firstName, lastName, email]);
-    if(data.rows[0].success == 0) {
-      success = false
-    } else {
-      success = true
-    }
-    sendMail(email, data.rows[0].id)
-    res.send({
-      firstName, 
-      lastName, 
+    const data = await pool.query(pgFunctions.settings.usp_addUser, [
+      firstName,
+      lastName,
       email,
-      id: data.rows[0].id
-    })
-    
+    ]);
+    if (data.rows[0].success == 0) {
+      success = false;
+    } else {
+      success = true;
+    }
+    sendMail(email, data.rows[0].id);
+    res.send({
+      firstName,
+      lastName,
+      email,
+      id: data.rows[0].id,
+    });
   } catch (err) {
     writeInLogs(err);
   }
@@ -49,18 +51,20 @@ router.post("/setPassword", tokenVerify, async (req, res) => {
     const { id, password } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
     let success;
-    const addPassword = await pool.query(pgFunctions.settings.usp_addPassword, [ id, hashPassword ]);
-    if(addPassword.rows[0].success == 0) {
-      success = false
+    const addPassword = await pool.query(pgFunctions.settings.usp_addPassword, [
+      id,
+      hashPassword,
+    ]);
+    if (addPassword.rows[0].success == 0) {
+      success = false;
     } else {
-      success = true
+      success = true;
     }
 
     res.send({
       success: success,
       errorMessage: addPassword.rows[0].errorMessage,
-    })
-    
+    });
   } catch (err) {
     writeInLogs(err);
   }
@@ -71,17 +75,20 @@ router.put("/changePassword", tokenVerify, async (req, res) => {
     const { id, password } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
     let success;
-    const changePassword = await pool.query(pgFunctions.settings.usp_changePassword, [ id, hashPassword ]);
-    if(changePassword.rows[0].success == 0) {
-      success = false
+    const changePassword = await pool.query(
+      pgFunctions.settings.usp_changePassword,
+      [id, hashPassword]
+    );
+    if (changePassword.rows[0].success == 0) {
+      success = false;
     } else {
-      success = true
+      success = true;
     }
 
     res.send({
       success: success,
       errorMessage: changePassword.rows[0].errorMessage,
-    })
+    });
   } catch (err) {
     writeInLogs(err);
   }
@@ -92,10 +99,10 @@ router.delete("/deleteUser/:id", tokenVerify, async (req, res) => {
     const { id } = req.params;
     let success;
     const data = await pool.query(pgFunctions.settings.usp_deleteUser, [id]);
-    if(data.rows[0].success == 0) {
-      success = false
+    if (data.rows[0].success == 0) {
+      success = false;
     } else {
-      success = true
+      success = true;
     }
     res.send({
       success: success,
@@ -108,13 +115,17 @@ router.delete("/deleteUser/:id", tokenVerify, async (req, res) => {
 
 router.put("/editUserInfo", tokenVerify, async (req, res) => {
   try {
-    const { id, firstName, lastName } = req.body;
+    const { user } = req.body;
     let success;
-    const data = await pool.query(pgFunctions.settings.usp_editUserInfo, [id, firstName, lastName]);
-    if(data.rows[0].success == 0) {
-      success = false
+    const data = await pool.query(pgFunctions.settings.usp_editUserInfo, [
+      user.id,
+      user.firstname,
+      user.lastname,
+    ]);
+    if (data.rows[0].success == 0) {
+      success = false;
     } else {
-      success = true
+      success = true;
     }
     res.send({
       success: data.rows[0].success,
@@ -125,4 +136,4 @@ router.put("/editUserInfo", tokenVerify, async (req, res) => {
   }
 });
 
-  module.exports = router;
+module.exports = router;

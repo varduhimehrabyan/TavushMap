@@ -31,7 +31,18 @@ router.get('/supportsForAdmin', tokenVerify, async (req, res) => {
   }
 });
 
-router.post('/supportsList', tokenVerify, async (req, res) => {
+router.post('/supportsList', async (req, res) => {
+  try {
+    const { language } = req.body;
+    const data = await pool.query(pgFunctions.supports.usp_supportsList, [language]);
+    res.send({ data: data.rows });
+  }
+  catch (err) {
+    writeInLogs(err);
+  }
+});
+
+router.post('/supportsListForAdmin', tokenVerify, async (req, res) => {
   try {
     const { language } = req.body;
     const data = await pool.query(pgFunctions.supports.usp_supportsList, [language]);
@@ -111,10 +122,10 @@ router.delete("/deleteSupport/:id", tokenVerify, async (req, res) => {
 
 router.put("/editSupport", tokenVerify, async (req, res) => {
   try {
-    const { id, support_eng, support_arm, categoryId } = req.body;
+    const { supportType } = req.body;
     let success;
     const data = await pool.query(pgFunctions.supports.usp_editSupport,
-      [id, support_eng, support_arm, categoryId]);
+      [supportType.id, supportType.name_eng, supportType.name_arm, supportType.categoryId]);
     if (data.rows[0].success == 0) {
       success = false
     } else {
