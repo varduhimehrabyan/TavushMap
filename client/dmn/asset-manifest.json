@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.8874c409.chunk.css",
-    "main.js": "/static/js/main.6928cf7d.chunk.js",
-    "main.js.map": "/static/js/main.6928cf7d.chunk.js.map",
+    "main.css": "/static/css/main.297211d6.chunk.css",
+    "main.js": "/static/js/main.cd5d46f8.chunk.js",
+    "main.js.map": "/static/js/main.cd5d46f8.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.cc89660e.js",
     "runtime-main.js.map": "/static/js/runtime-main.cc89660e.js.map",
     "static/css/2.0cfad52a.chunk.css": "/static/css/2.0cfad52a.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.2b020deb.chunk.js.map": "/static/js/2.2b020deb.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.0cfad52a.chunk.css.map": "/static/css/2.0cfad52a.chunk.css.map",
-    "static/css/main.8874c409.chunk.css.map": "/static/css/main.8874c409.chunk.css.map",
+    "static/css/main.297211d6.chunk.css.map": "/static/css/main.297211d6.chunk.css.map",
     "static/js/2.2b020deb.chunk.js.LICENSE.txt": "/static/js/2.2b020deb.chunk.js.LICENSE.txt",
     "static/media/App.css": "/static/media/Mardoto-Thin.31b769c1.ttf",
     "static/media/add.svg": "/static/media/add.3450273c.svg",
@@ -42,7 +42,7 @@
     "static/js/runtime-main.cc89660e.js",
     "static/css/2.0cfad52a.chunk.css",
     "static/js/2.2b020deb.chunk.js",
-    "static/css/main.8874c409.chunk.css",
-    "static/js/main.6928cf7d.chunk.js"
+    "static/css/main.297211d6.chunk.css",
+    "static/js/main.cd5d46f8.chunk.js"
   ]
 }

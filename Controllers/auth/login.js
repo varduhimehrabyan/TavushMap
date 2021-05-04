@@ -9,6 +9,7 @@ router.use(express.json());
 router.use(cookieParser());
 const createToken = require("../../Services/createToken");
 const pgFunctions = require("../../pgFunctions");
+const writeInLogs = require("../../Services/writeInLogs");
 
 router.post("/login", async (req, res) => {
   try {
@@ -17,14 +18,14 @@ router.post("/login", async (req, res) => {
     const user = await pool.query(pgFunctions.login.usp_login, [email]);
 
     if (user.rows[0].id == null) {
-      res.status(404).send({ success: false, errorMessage: "No email" });
+      res.send({ success: false, errorMessage: "No email" });
     } else {
       const passwordValid = await bcrypt.compare(
         password,
         user.rows[0].password
       );
       if (passwordValid) {
-        const token = createToken(res, email, user.rows[0].Id);
+        createToken(res, email, user.rows[0].Id);
 
         res.status(200).json({ success: true });
       } else {
@@ -37,11 +38,12 @@ router.post("/login", async (req, res) => {
       }
     }
   } catch (err) {
+    writeInLogs(err)
     res.status(500).send("Invalid password");
   }
 });
 
 // function createToken(email) {
-//     return jwt.sign({ email }, secret)
+// return jwt.sign({ email }, secret)
 // }
 module.exports = router;
