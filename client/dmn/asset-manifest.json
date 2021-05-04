@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.8514143f.chunk.css",
-    "main.js": "/static/js/main.79e4ff51.chunk.js",
-    "main.js.map": "/static/js/main.79e4ff51.chunk.js.map",
+    "main.css": "/static/css/main.8874c409.chunk.css",
+    "main.js": "/static/js/main.6928cf7d.chunk.js",
+    "main.js.map": "/static/js/main.6928cf7d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.cc89660e.js",
     "runtime-main.js.map": "/static/js/runtime-main.cc89660e.js.map",
     "static/css/2.0cfad52a.chunk.css": "/static/css/2.0cfad52a.chunk.css",
-    "static/js/2.d013660f.chunk.js": "/static/js/2.d013660f.chunk.js",
-    "static/js/2.d013660f.chunk.js.map": "/static/js/2.d013660f.chunk.js.map",
+    "static/js/2.2b020deb.chunk.js": "/static/js/2.2b020deb.chunk.js",
+    "static/js/2.2b020deb.chunk.js.map": "/static/js/2.2b020deb.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.0cfad52a.chunk.css.map": "/static/css/2.0cfad52a.chunk.css.map",
-    "static/css/main.8514143f.chunk.css.map": "/static/css/main.8514143f.chunk.css.map",
-    "static/js/2.d013660f.chunk.js.LICENSE.txt": "/static/js/2.d013660f.chunk.js.LICENSE.txt",
+    "static/css/main.8874c409.chunk.css.map": "/static/css/main.8874c409.chunk.css.map",
+    "static/js/2.2b020deb.chunk.js.LICENSE.txt": "/static/js/2.2b020deb.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/Mardoto-Thin.31b769c1.ttf",
     "static/media/add.svg": "/static/media/add.3450273c.svg",
     "static/media/arrow.svg": "/static/media/arrow.3fc29e35.svg",
     "static/media/budget.svg": "/static/media/budget.884be489.svg",
@@ -40,8 +41,8 @@
   "entrypoints": [
     "static/js/runtime-main.cc89660e.js",
     "static/css/2.0cfad52a.chunk.css",
-    "static/js/2.d013660f.chunk.js",
-    "static/css/main.8514143f.chunk.css",
-    "static/js/main.79e4ff51.chunk.js"
+    "static/js/2.2b020deb.chunk.js",
+    "static/css/main.8874c409.chunk.css",
+    "static/js/main.6928cf7d.chunk.js"
   ]
 }

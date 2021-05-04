@@ -11,6 +11,4 @@ app.use('/api', require('./Controllers'))
 app.use('/dmn', require('./dmn'))
 app.use('/user', require('./user'))
 
-app.listen(4000, () => {
-	console.log("Server started")
-});
+app.listen(4000);

@@ -12,7 +12,6 @@ const pool = new Pool({
     port: global.env.port
 })
 
-console.log(global.env.dbhost)
 module.exports = pool
 
 
