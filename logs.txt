@@ -1,0 +1,9 @@
+10/25/2021  14:29 
+  Error: getaddrinfo ENOTFOUND localhodt 
+
+10/25/2021  14:30 
+  error: password authentication failed for user "postgres" 
+
+10/25/2021  14:30 
+  error: password authentication failed for user "postgres" 
+
