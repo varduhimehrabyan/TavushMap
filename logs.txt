@@ -7,3 +7,21 @@
 10/25/2021  14:30 
   error: password authentication failed for user "postgres" 
 
+10/25/2021  16:11 
+  error: invalid input syntax for integer: "" 
+
+10/25/2021  16:17 
+  Error: connect ECONNREFUSED 127.0.0.1:5449 
+
+10/25/2021  16:17 
+  Error: connect ECONNREFUSED 127.0.0.1:5449 
+
+10/25/2021  16:17 
+  Error: connect ECONNREFUSED 127.0.0.1:5449 
+
+10/25/2021  16:17 
+  Error: connect ECONNREFUSED 127.0.0.1:5449 
+
+10/25/2021  16:17 
+  Error: connect ECONNREFUSED 127.0.0.1:5449 
+
