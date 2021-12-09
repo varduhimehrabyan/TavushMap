@@ -22,6 +22,7 @@ router.post("/organizations", async (req, res) => {
       data: arr,
     });
   } catch (err) {
+    res.status(400).send();
     writeInLogs(err);
   }
 });

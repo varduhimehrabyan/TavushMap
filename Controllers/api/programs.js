@@ -55,6 +55,7 @@ router.post("/addProgram", tokenVerify, async (req, res) => {
       description_eng,
       statusid,
       isdonor,
+      donorId,
     } = req.body;
 
     const data = await pool.query(pgFunctions.programs.usp_addProgram, [
@@ -74,6 +75,7 @@ router.post("/addProgram", tokenVerify, async (req, res) => {
       description_eng,
       statusid,
       isdonor,
+      donorId,
     ]);
     res.send({
       programid: data.rows[0].programid,
@@ -128,11 +130,11 @@ router.put("/editProgram", tokenVerify, async (req, res) => {
       description_arm,
       description_eng,
       statusId,
+      donorId,
     } = req.body.program;
     let isSelect = req.body.isSelect;
     let startDate = req.body.startDate;
     let endDate = req.body.endDate;
-    console.log("lll", endDate);
     for (i = 0; i < community.length; i++) {
       communities.push(community[i].communityId);
     }
@@ -161,16 +163,15 @@ router.put("/editProgram", tokenVerify, async (req, res) => {
       description_arm,
       description_eng,
       statusId,
+      donorId,
     ]);
-    // console.log(id, supports, communities, organizations, programName_arm,
-    //   programName_eng, budget, startDate, endDate, manager_arm, manager_eng,
-    //   contact_arm, contact_eng, isDonor, description_arm, description_eng, statusId);
     res.send({
       programid: data.rows[0].id,
       success: data.rows[0].success,
       errorMessage: data.rows[0].errorMessage,
     });
   } catch (err) {
+    res.status(400).send();
     writeInLogs(err);
   }
 });

@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.297211d6.chunk.css",
-    "main.js": "/static/js/main.cd5d46f8.chunk.js",
-    "main.js.map": "/static/js/main.cd5d46f8.chunk.js.map",
+    "main.css": "/static/css/main.9f98ca43.chunk.css",
+    "main.js": "/static/js/main.48a7776b.chunk.js",
+    "main.js.map": "/static/js/main.48a7776b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.cc89660e.js",
     "runtime-main.js.map": "/static/js/runtime-main.cc89660e.js.map",
     "static/css/2.0cfad52a.chunk.css": "/static/css/2.0cfad52a.chunk.css",
-    "static/js/2.2b020deb.chunk.js": "/static/js/2.2b020deb.chunk.js",
-    "static/js/2.2b020deb.chunk.js.map": "/static/js/2.2b020deb.chunk.js.map",
+    "static/js/2.38d6167c.chunk.js": "/static/js/2.38d6167c.chunk.js",
+    "static/js/2.38d6167c.chunk.js.map": "/static/js/2.38d6167c.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.0cfad52a.chunk.css.map": "/static/css/2.0cfad52a.chunk.css.map",
-    "static/css/main.297211d6.chunk.css.map": "/static/css/main.297211d6.chunk.css.map",
-    "static/js/2.2b020deb.chunk.js.LICENSE.txt": "/static/js/2.2b020deb.chunk.js.LICENSE.txt",
+    "static/css/main.9f98ca43.chunk.css.map": "/static/css/main.9f98ca43.chunk.css.map",
+    "static/js/2.38d6167c.chunk.js.LICENSE.txt": "/static/js/2.38d6167c.chunk.js.LICENSE.txt",
     "static/media/App.css": "/static/media/Mardoto-Thin.31b769c1.ttf",
     "static/media/add.svg": "/static/media/add.3450273c.svg",
     "static/media/arrow.svg": "/static/media/arrow.3fc29e35.svg",
@@ -30,7 +30,7 @@
     "static/media/orggray.svg": "/static/media/orggray.ccd0de8e.svg",
     "static/media/phere.svg": "/static/media/phere.c4fe6f04.svg",
     "static/media/programm.svg": "/static/media/programm.ae7da56a.svg",
-    "static/media/red-star.svg": "/static/media/red-star.71f40dfb.svg",
+    "static/media/red-star.svg": "/static/media/red-star.27a8d01d.svg",
     "static/media/remove.svg": "/static/media/remove.b0df4f4b.svg",
     "static/media/settings.svg": "/static/media/settings.8b479a31.svg",
     "static/media/sphere.svg": "/static/media/sphere.c8b29079.svg",
@@ -41,8 +41,8 @@
   "entrypoints": [
     "static/js/runtime-main.cc89660e.js",
     "static/css/2.0cfad52a.chunk.css",
-    "static/js/2.2b020deb.chunk.js",
-    "static/css/main.297211d6.chunk.css",
-    "static/js/main.cd5d46f8.chunk.js"
+    "static/js/2.38d6167c.chunk.js",
+    "static/css/main.9f98ca43.chunk.css",
+    "static/js/main.48a7776b.chunk.js"
   ]
 }
